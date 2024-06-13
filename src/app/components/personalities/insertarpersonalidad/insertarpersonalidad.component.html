@@ -1,0 +1,28 @@
+<div class="title-container">
+    <div class="title-container"><h1>Registro</h1></div>
+    <form [formGroup]="form" (submit)="registrar()">
+      <mat-form-field appearance="fill" *ngIf="edicionpersonalidad">
+        <mat-label>Código</mat-label>
+        <input matInput placeholder="Código" formControlName="codigo" readonly/>
+      </mat-form-field>
+      <br />
+      <mat-form-field>
+        <input matInput placeholder="Nombre" formControlName="nombre" />
+        <mat-error *ngIf="form.get('nombre')?.hasError('required')">
+          El nombre es obligatorio.</mat-error
+        >
+      </mat-form-field>
+      <br />
+
+      <mat-form-field>
+        <input matInput placeholder="Descripcion" formControlName="descripcion" />
+        <mat-error *ngIf="form.get('nombre')?.hasError('required')">
+          El nombre es obligatorio.</mat-error
+        >
+      </mat-form-field>
+  
+      <br/>
+      <button mat-raised-button color="warn">Aceptar</button> 
+    </form>
+</div>
+  

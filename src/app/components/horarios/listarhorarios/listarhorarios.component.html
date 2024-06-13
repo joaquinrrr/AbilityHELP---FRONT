@@ -1,0 +1,37 @@
+<div class="container">
+    <div class="title-container">
+      <h1>Lista de Horarios</h1>
+    </div>
+  
+    <div class="card-container" >
+      <mat-card *ngFor="let element of dataSource.data">
+        <mat-card-header>
+          <mat-card-title>{{ element.userCoach.username }}</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <p>Código del horario: {{ element.idSchedule }}</p>
+          <p>Fecha del horario: {{ element.weekDay }}</p>
+          <p>Hora inicio: {{ element.startHour }}</p>
+          <p>Hora fin : {{ element.finishHour }}</p>
+          <div class="button-container-right">
+            <button
+              mat-raised-button
+              color="primary"
+              [routerLink]="['ediciones-horarios', element.idSchedule]"
+            >
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button
+              mat-raised-button
+              color="warn"
+              (click)="eliminar(element.idSchedule)"
+            >
+              <mat-icon>delete_sweep</mat-icon>
+            </button>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+    <mat-paginator [pageSizeOptions]="[2, 10, 20]" showFirstLastButtons aria-label="Select page of periodic elements"></mat-paginator>
+</div>
+  

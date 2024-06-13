@@ -1,0 +1,41 @@
+<div class="title-container"><h1 class="title">Registro de Roles</h1></div>
+<div class="container" style="text-align: center">
+  <form [formGroup]="form" (submit)="registrar()" class="example-form">
+    <mat-form-field class="example-full-width" *ngIf="edicionroles">
+      <mat-label>Codigo</mat-label>
+      <input matInput placeholder="Codigo" formControlName="codigo" readonly />
+    </mat-form-field>
+    <br />
+
+    <mat-form-field class="example-full-width">
+      <mat-label>Roles</mat-label>
+      <mat-select formControlName="rol">
+        <mat-option *ngFor="let tr of tiposroles " [value]="tr.value">
+          {{ tr.viewValue }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="form.get('rol')?.hasError('required')"
+        >El modelo es obligatorio.</mat-error
+      >
+    </mat-form-field>
+    <br />
+
+    <mat-form-field class="example-full-width">
+      <mat-label>Usuario</mat-label>
+      <mat-select formControlName="usuario">
+        <mat-option *ngFor="let us of listarusers" [value]="us.idUser">
+          {{ us.username }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="form.get('usuario')?.hasError('required')"
+        >El usuario es obligatoria.</mat-error
+      >
+    </mat-form-field>
+    <br />
+
+    <button mat-raised-button color="primary">Aceptar</button>
+    <button mat-raised-button color="warn" routerLink="/roles">
+      Cancelar
+    </button>
+  </form>
+</div>

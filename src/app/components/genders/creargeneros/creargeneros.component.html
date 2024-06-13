@@ -1,0 +1,20 @@
+<div class="title-container">
+    <div class="title-container"><h1>Registro</h1></div>
+    <form [formGroup]="form" (submit)="registrar()">
+
+      <mat-form-field appearance="fill" *ngIf="ediciongender">
+        <mat-label>Código</mat-label>
+        <input matInput placeholder="Código" formControlName="codigo" readonly/>
+      </mat-form-field>
+      <br />
+      <mat-form-field>
+        <input matInput placeholder="Género" formControlName="genero" />
+        <mat-error *ngIf="form.get('genero')?.hasError('required')">
+          El genero es obligatorio.</mat-error
+        >
+      </mat-form-field>
+      <br/>
+      <button mat-raised-button color="warn">Aceptar</button> 
+    </form>
+</div>
+  

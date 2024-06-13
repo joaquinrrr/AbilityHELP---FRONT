@@ -1,0 +1,36 @@
+<div class="title-container"><h1 class="title">Registro de incidentes</h1></div>
+<div class="container" style="text-align: center">
+  <form [formGroup]="form" (submit)="aceptar()" class="example-form">
+    <mat-form-field class="example-full-width" *ngIf="edicionusers">
+      <mat-label>Codigo</mat-label>
+      <input matInput placeholder="Codigo" formControlName="codigo" readonly/>
+    </mat-form-field>
+    <br />
+    <mat-form-field class="example-full-width">
+      <mat-label>Tipo de incidente:</mat-label>
+      <input
+        matInput
+        placeholder="Tipo de incidente"
+        formControlName="tipo"
+      />
+      <mat-error *ngIf="form.get('tipo')?.hasError('required')"
+        >El incidente es obligatorio.</mat-error
+      >
+    </mat-form-field>
+    <br />
+
+    <mat-form-field class="example-full-width">
+      <mat-label>Descripcion:</mat-label>
+      <input matInput placeholder="Descripcion" formControlName="descripcion" />
+      <mat-error *ngIf="form.get('descripcion')?.hasError('required')"
+        >La descripcion es obligatoria.</mat-error
+      >
+    </mat-form-field>
+    <br />
+
+    <button mat-raised-button color="primary">Aceptar</button>
+    <button mat-raised-button color="warn" routerLink="/usuarios">
+      Cancelar
+    </button>
+  </form>
+</div>
