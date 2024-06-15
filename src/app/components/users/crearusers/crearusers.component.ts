@@ -93,14 +93,15 @@ export class CrearusersComponent implements OnInit {
       this.u.password = this.form.value.contrasenia;
       this.u.ageUser = this.form.value.edad;
       this.u.enabled = this.form.value.enabled;
-      this.u.gender.idGender = this.form.value.genero;
-      this.u.personality.idPersonality = this.form.value.personalidad;
+      this.u.gender.idGender = this.form.value.genero
+      this.u.personality.idPersonality = this.form.value.personalidad
 
       if (this.edicionusers) {
         this.sU.update(this.u).subscribe(() => {
           this.sU.list().subscribe((data) => {
             this.sU.setList(data);
           });
+          this.router.navigate(['usuarios']);
         });
       } else {
         this.sU.insert(this.u).subscribe((newUser: Users) => {
@@ -136,7 +137,7 @@ export class CrearusersComponent implements OnInit {
   init() {
     if (this.edicionusers) {
       this.sU.listId(this.id).subscribe((data) => {
-        this.form = this.formBuilder.group({
+        this.form.setValue({
           codigo: data.idUser,
           nombre: data.username,
           email: data.emailUser,
