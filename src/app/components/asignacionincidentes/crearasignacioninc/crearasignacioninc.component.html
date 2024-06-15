@@ -54,7 +54,7 @@
     <mat-form-field class="example-full-width">
         <mat-label>Usuario administrador</mat-label>
         <mat-select formControlName="admin">
-          <mat-option *ngFor="let usadmin of listarusuarios" [value]="usadmin.idUser">
+          <mat-option *ngFor="let usadmin of listaAdmins" [value]="usadmin.idUser">
             {{ usadmin.username }}
           </mat-option>
         </mat-select>

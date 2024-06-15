@@ -43,6 +43,7 @@ export class CrearasignacionincComponent {
   form: FormGroup = new FormGroup({});
   a: AssignIncidents = new AssignIncidents();
   listarusuarios: Users[] = [];
+  listaAdmins: Users[] = [];
   listarincidentes: Incidents[] = [];
   edicionasignarinci: boolean = false;
   id: number = 0;
@@ -85,6 +86,9 @@ export class CrearasignacionincComponent {
     });
     this.sI.list().subscribe((data) => {
       this.listarincidentes = data;
+    });
+    this.sU.listByRole('ADMIN').subscribe((data) => {
+      this.listaAdmins = data;
     });
   }
 
