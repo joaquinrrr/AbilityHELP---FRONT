@@ -8,7 +8,7 @@ import {
   withFetch,
   withInterceptorsFromDi,
 } from '@angular/common/http';
-import { JwtModule } from '@auth0/angular-jwt';
+import { JwtHelperService, JwtModule } from '@auth0/angular-jwt';
 export function tokenGetter() {
   return sessionStorage.getItem('token');
 }
@@ -26,6 +26,6 @@ export const appConfig: ApplicationConfig = {
       })
     ),
     provideAnimationsAsync(),
-    provideAnimationsAsync(), provideAnimationsAsync(),
+    provideAnimationsAsync(), provideAnimationsAsync(), provideZoneChangeDetection(),
   ], 
 };

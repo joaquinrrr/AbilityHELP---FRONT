@@ -131,7 +131,7 @@ export class CrearusersComponent implements OnInit {
 
   createRoleForUser(userId: number): void {
     const newRole = new Roles();
-    newRole.rol = 'STUDENT'; // o cualquier rol por defecto que desees asignar
+    newRole.rol = 'STUDENT'; 
     newRole.user = { idUser: userId } as Users;
 
     this.sR.insert(newRole).subscribe((data) => {

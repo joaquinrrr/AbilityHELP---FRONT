@@ -36,7 +36,7 @@
   <button mat-menu-item [matMenuTriggerFor]="menuHorarios" *ngIf="isADMIN()" class="custom-button">
     <mat-icon>schedule</mat-icon><span class="button-text">Horarios</span>
   </button>
-  <button mat-menu-item [matMenuTriggerFor]="menuReuniones" *ngIf="isADMIN()" class="custom-button">
+  <button mat-menu-item [matMenuTriggerFor]="menuReuniones" *ngIf="isSTUDENT()" class="custom-button">
     <mat-icon>meeting_room</mat-icon><span class="button-text">Reuniones</span>
   </button>
   <button mat-menu-item [matMenuTriggerFor]="menuAsigancionInc" *ngIf="isADMIN()" class="custom-button">
