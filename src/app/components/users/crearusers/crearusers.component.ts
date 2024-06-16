@@ -16,6 +16,7 @@ import { PersonalitiesService } from '../../../services/personalities.service';
 import { GendersService } from '../../../services/genders.service';
 import { RolesService } from '../../../services/roles.service';
 import { Roles } from '../../../models/roles';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-crearusers',
@@ -31,6 +32,7 @@ import { Roles } from '../../../models/roles';
     RouterLink,
     ReactiveFormsModule,
     MatInputModule,
+    MatIconModule
   ],
   templateUrl: './crearusers.component.html',
   styleUrl: './crearusers.component.css',
@@ -42,6 +44,7 @@ export class CrearusersComponent implements OnInit {
   listapersonalidades: Personalities[] = [];
   edicionusers: boolean = false;
   id: number = 0;
+  hidePassword: boolean = true;
 
   constructor(
     private sU: UsersService,
@@ -83,6 +86,10 @@ export class CrearusersComponent implements OnInit {
     this.sP.list().subscribe((data) => {
       this.listapersonalidades = data;
     });
+  }
+
+  togglePasswordVisibility(): void {
+    this.hidePassword = !this.hidePassword;
   }
 
   aceptar(): void {
