@@ -48,7 +48,7 @@ export class CrearincidentesComponent implements OnInit{
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
   ) {}
-
+// validar los datos a ingresar
   ngOnInit(): void {
     this.route.params.subscribe((data: Params) => {
       this.id = data['id'];
