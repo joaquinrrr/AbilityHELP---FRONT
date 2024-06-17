@@ -69,6 +69,7 @@ export class CreargenerosComponent implements OnInit{
           });
         });
       }
+      //redireccionar a /generos
     this.router.navigate(['generos']);
     }
   }
