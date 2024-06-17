@@ -28,11 +28,12 @@ import { CrearasignacionincComponent } from './components/asignacionincidentes/c
 import { HomeComponent } from './components/home/home.component';
 import { segGuard } from './guard/seguridad.guard';
 import { LoginComponent } from './components/login/login.component';
+import { HomelandingComponent } from './components/homelanding/homelanding.component';
 
 export const routes: Routes = [
     {
         path: '',
-        redirectTo: 'login',
+        redirectTo: 'homelanding',
         pathMatch: 'full',
     },
     {
@@ -58,10 +59,15 @@ export const routes: Routes = [
     {
         path:'usuarios',component:UsersComponent,
         children:[
-            { path:'insertar',component:CrearusersComponent },
             { path:'ediciones-users/:id', component:CrearusersComponent },
         ],
         canActivate: [segGuard], 
+    },
+    {
+        path:'usuarios',component:UsersComponent,
+        children:[
+            { path:'insertar',component:CrearusersComponent },
+        ],
     },
     {
         path:'roles', component: RolesComponent,
@@ -136,8 +142,7 @@ export const routes: Routes = [
         canActivate: [segGuard], // solo construcciones, se debe agregar a cada uno
     },
     {
-        path: 'homes',
-        component: HomeComponent,
-        canActivate: [segGuard], // solo construcciones, se debe agregar a cada uno
+        path: 'homelanding',
+        component: HomelandingComponent,
     },
 ];
