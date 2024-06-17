@@ -45,6 +45,8 @@ export class CreargenerosComponent implements OnInit{
       this.ediciongender = data['id'] != null;
       this.init();
     });
+
+    //validaciones de campos
     this.form = this.formBuilder.group({
       codigo: [''],
       genero: ['', Validators.required],
