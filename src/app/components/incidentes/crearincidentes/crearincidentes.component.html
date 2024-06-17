@@ -3,6 +3,7 @@
   <form [formGroup]="form" (submit)="aceptar()" class="example-form">
     <mat-form-field class="example-full-width" *ngIf="edicionusers">
       <mat-label>Codigo</mat-label>
+      <!--activar el solo leer el código para la edicion-->
       <input matInput placeholder="Codigo" formControlName="codigo" readonly/>
     </mat-form-field>
     <br />
