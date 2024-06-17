@@ -145,4 +145,10 @@ export const routes: Routes = [
         path: 'homelanding',
         component: HomelandingComponent,
     },
+
+    {
+        path: 'homes',
+        component: HomeComponent,
+        canActivate: [segGuard], // solo construcciones, se debe agregar a cada uno
+    },
 ];
