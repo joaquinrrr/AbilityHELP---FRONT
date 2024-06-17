@@ -4,9 +4,10 @@
 
       <mat-form-field appearance="fill" *ngIf="ediciongender">
         <mat-label>Código</mat-label>
+        <!--activa la opción de solo lectura del código para que no se edite-->
         <input matInput placeholder="Código" formControlName="codigo" readonly/>
       </mat-form-field>
-      <br />
+      <br /> 
       <mat-form-field>
         <input matInput placeholder="Género" formControlName="genero" />
         <mat-error *ngIf="form.get('genero')?.hasError('required')">
