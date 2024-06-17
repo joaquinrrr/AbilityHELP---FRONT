@@ -73,6 +73,7 @@ export class CreargenerosComponent implements OnInit{
     this.router.navigate(['generos']);
     }
   }
+  //editar el nombre del genero
   init() {
     if (this.ediciongender) {
       this.sG.listId(this.id).subscribe((data) => {
