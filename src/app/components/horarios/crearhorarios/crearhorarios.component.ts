@@ -56,7 +56,7 @@ export class CrearhorariosComponent implements OnInit {
     private route: ActivatedRoute,
     private sU: UsersService,
   ) {}
-
+  //validar los campos que requiere la tabla horarios
   ngOnInit(): void {
     this.route.params.subscribe((data: Params) => {
       this.id = data['id'];
@@ -74,7 +74,6 @@ export class CrearhorariosComponent implements OnInit {
       this.listausuarios = data;
     });
   }
-
   aceptar(): void {
     if (this.form.valid) {
       const date = this.form.value.dia;
