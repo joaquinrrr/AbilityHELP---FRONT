@@ -92,6 +92,15 @@ export const routes: Routes = [
         ],
         canActivate: [segGuard], 
     },
+
+    {
+        path:'roles', component: RolesComponent,
+        children:[
+            { path:'insertar',component:CrearrolesComponent },
+            { path:'ediciones-roles/:id', component:CrearrolesComponent },
+        ],
+        canActivate: [segGuard], 
+    },
     {
         path:'carreras', component: CarrerasComponent,
         children:[
