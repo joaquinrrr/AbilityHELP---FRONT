@@ -1,3 +1,4 @@
+import { UserlandingComponent } from './userlanding/userlanding.component';
 import { Routes } from '@angular/router';
 import { PersonalitiesComponent } from './components/personalities/personalities.component';
 import { Gender } from './models/genders';
@@ -29,6 +30,7 @@ import { HomeComponent } from './components/home/home.component';
 import { segGuard } from './guard/seguridad.guard';
 import { LoginComponent } from './components/login/login.component';
 import { HomelandingComponent } from './components/homelanding/homelanding.component';
+import { CrearuserComponent } from './userlanding/crearuser/crearuser.component';
 
 export const routes: Routes = [
     {
@@ -43,30 +45,43 @@ export const routes: Routes = [
     {
         path:'personalidades',component:PersonalitiesComponent,
         children:[
-            { path:'insertar',component:InsertarpersonalidadComponent },
             { path:'ediciones-personalidad/:id', component:InsertarpersonalidadComponent },
         ],
         canActivate: [segGuard], 
     },
+
+    {
+        path:'personalidades',component:PersonalitiesComponent,
+        children:[
+            { path:'insertar',component:InsertarpersonalidadComponent },
+        ],
+    },
     {
         path:'generos',component:GendersComponent,
         children:[
-            { path:'insertar',component:CreargenerosComponent },
             { path:'ediciones-gender/:id', component:CreargenerosComponent },
         ],
         canActivate: [segGuard], 
     },
+
     {
-        path:'usuarios',component:UsersComponent,
+        path:'generos',component:GendersComponent,
         children:[
-            { path:'ediciones-users/:id', component:CrearusersComponent },
+            { path:'insertar',component:CreargenerosComponent },
         ],
-        canActivate: [segGuard], 
     },
     {
         path:'usuarios',component:UsersComponent,
         children:[
             { path:'insertar',component:CrearusersComponent },
+            { path:'ediciones-users/:id', component:CrearusersComponent },
+        ],
+        canActivate: [segGuard], 
+    },
+    {
+        path:'userlanding',component:UserlandingComponent,
+        children:[
+            { path:'insertar',component:CrearuserComponent },
         ],
     },
     {

@@ -21,6 +21,6 @@ export class HomelandingComponent {
   }
 
   redirectToRegister() {
-    this.router.navigate(['/usuarios/insertar']); 
+    this.router.navigate(['/userlanding/insertar']); 
   }
 }
