@@ -27,13 +27,13 @@
   <button mat-menu-item [matMenuTriggerFor]="menuTipoInteracciones" *ngIf="isADMIN()" class="custom-button">
     <mat-icon>psychology</mat-icon><span class="button-text">Tipo de Interacciones</span>
   </button>
-  <button mat-menu-item [matMenuTriggerFor]="menuInteracciones" *ngIf="isADMIN()" class="custom-button">
+  <button mat-menu-item [matMenuTriggerFor]="menuInteracciones" class="custom-button">
     <mat-icon>question_answer</mat-icon><span class="button-text">Interacciones</span>
   </button>
-  <button mat-menu-item [matMenuTriggerFor]="menuChat" *ngIf="isADMIN()" class="custom-button">
+  <button mat-menu-item [matMenuTriggerFor]="menuChat" class="custom-button">
     <mat-icon>chat</mat-icon><span class="button-text">Chats</span>
   </button>
-  <button mat-menu-item [matMenuTriggerFor]="menuHorarios" *ngIf="isADMIN()" class="custom-button">
+  <button mat-menu-item [matMenuTriggerFor]="menuHorarios" class="custom-button">
     <mat-icon>schedule</mat-icon><span class="button-text">Horarios</span>
   </button>
   <button mat-menu-item [matMenuTriggerFor]="menuReuniones" *ngIf="isSTUDENT()" class="custom-button">
@@ -159,6 +159,7 @@
   </button>
   <button mat-menu-item>
     Rol: <span>{{ role }}</span>
+    <p>Nombre de usuario: {{ userId }}</p>
   </button>
 </mat-menu>
 

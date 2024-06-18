@@ -1,89 +1,70 @@
 <div class="title-container">
-    <h1 class="title">Registro de interacciones</h1>
-  </div>
-  <div class="container" style="text-align: center">
-    <form [formGroup]="form" (submit)="aceptar()" class="example-form">
-      <mat-form-field class="example-full-width" *ngIf="edicionhorarios">
-        <mat-label>Codigo</mat-label>
-        <input matInput placeholder="Codigo" formControlName="codigo" />
-      </mat-form-field>
-      <br />
-  
-      <mat-form-field appearance="fill" class="example-full-width">
-        <input
-          matInput
-          placeholder="Ingrese fecha del horario"
-          [matDatepicker]="datePicker"
-          formControlName="dia"
-          [min]="mindate"
-          [max]="maxDate"
-        />
-        <mat-hint>MM/DD/YYYY</mat-hint>
-        <mat-datepicker-toggle
-          matIconSuffix
-          [for]="datePicker"
-        ></mat-datepicker-toggle>
-        <mat-datepicker #datePicker></mat-datepicker>
-        <mat-error *ngIf="form.get('dia')?.hasError('required')">
-          La fecha es obligatoria.
-        </mat-error>
-      </mat-form-field>
-      <br/>
-  
-      <mat-form-field appearance="fill" class="example-full-width">
-        <input
-          matInput
-          [ngxTimepicker]="startTimePicker"
-          placeholder="Ingrese la hora de inicio"
-          formControlName="horainicio"
-        />
-        <ngx-material-timepicker-toggle
-          [for]="startTimePicker"
-          matSuffix
-        ></ngx-material-timepicker-toggle>
-        <ngx-material-timepicker #startTimePicker></ngx-material-timepicker>
-        <mat-error *ngIf="form.get('horainicio')?.hasError('required')">
-          La hora de inicio es obligatoria.
-        </mat-error>
-      </mat-form-field>
-      <br/>
-  
-      <mat-form-field appearance="fill" class="example-full-width">
-        <input
-          matInput
-          [ngxTimepicker]="endTimePicker"
-          placeholder="Ingrese la hora de fin"
-          formControlName="horafin"
-        />
-        <ngx-material-timepicker-toggle
-          [for]="endTimePicker"
-          matSuffix
-        ></ngx-material-timepicker-toggle>
-        <ngx-material-timepicker #endTimePicker></ngx-material-timepicker>
-        <mat-error *ngIf="form.get('horafin')?.hasError('required')">
-          La hora de fin es obligatoria.
-        </mat-error>
-      </mat-form-field>
-      <br/>
-  
-      <mat-form-field class="example-full-width">
-        <mat-label>Usuario que envia</mat-label>
-        <mat-select formControlName="coach">
-          <mat-option *ngFor="let uscoach of listausuarios" [value]="uscoach.idUser">
-            {{ uscoach.username }}
-          </mat-option>
-        </mat-select>
-        <mat-error *ngIf="form.get('coach')?.hasError('required')">
-          El coach es obligatorio.
-        </mat-error>
-      </mat-form-field>
-      <br />
-  
-      <br />
-      <button mat-raised-button color="primary" >Aceptar</button>
-      <button mat-raised-button color="warn" routerLink="/horarios">
-        Cancelar
-      </button>
-    </form>
-  </div>
-  
+  <h1 class="title">Registro de interacciones</h1>
+</div>
+<div class="container" style="text-align: center">
+  <form [formGroup]="form" (submit)="aceptar()" class="example-form">
+    <mat-form-field class="example-full-width" *ngIf="edicionhorarios">
+      <mat-label>Codigo</mat-label>
+      <input matInput placeholder="Codigo" formControlName="codigo" />
+    </mat-form-field>
+    <br />
+
+    <mat-form-field appearance="fill" class="example-full-width">
+      <input
+        matInput
+        placeholder="Ingrese fecha del horario"
+        [matDatepicker]="datePicker"
+        formControlName="dia"
+        [min]="mindate"
+        [max]="maxDate"
+      />
+      <mat-hint>MM/DD/YYYY</mat-hint>
+      <mat-datepicker-toggle matIconSuffix [for]="datePicker"></mat-datepicker-toggle>
+      <mat-datepicker #datePicker></mat-datepicker>
+      <mat-error *ngIf="form.get('dia')?.hasError('required')">
+        La fecha es obligatoria.
+      </mat-error>
+    </mat-form-field>
+    <br />
+
+    <mat-form-field appearance="fill" class="example-full-width">
+      <input
+        matInput
+        [ngxTimepicker]="startTimePicker"
+        placeholder="Ingrese la hora de inicio"
+        formControlName="horainicio"
+      />
+      <ngx-material-timepicker-toggle [for]="startTimePicker" matSuffix></ngx-material-timepicker-toggle>
+      <ngx-material-timepicker #startTimePicker></ngx-material-timepicker>
+      <mat-error *ngIf="form.get('horainicio')?.hasError('required')">
+        La hora de inicio es obligatoria.
+      </mat-error>
+    </mat-form-field>
+    <br />
+
+    <mat-form-field appearance="fill" class="example-full-width">
+      <input
+        matInput
+        [ngxTimepicker]="endTimePicker"
+        placeholder="Ingrese la hora de fin"
+        formControlName="horafin"
+      />
+      <ngx-material-timepicker-toggle [for]="endTimePicker" matSuffix></ngx-material-timepicker-toggle>
+      <ngx-material-timepicker #endTimePicker></ngx-material-timepicker>
+      <mat-error *ngIf="form.get('horafin')?.hasError('required')">
+        La hora de fin es obligatoria.
+      </mat-error>
+    </mat-form-field>
+    <br />
+
+    <mat-form-field class="example-full-width">
+      <mat-label>Usuario que envia</mat-label>
+      <input matInput [value]="currentUser.username" disabled />
+      <input type="hidden" formControlName="coach" />
+    </mat-form-field>
+    <br />
+
+    <button mat-raised-button color="primary" type="submit">Aceptar</button>
+    <button mat-raised-button color="warn" routerLink="/horarios">Cancelar</button>
+  </form>
+</div>

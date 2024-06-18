@@ -1,6 +1,8 @@
-<div class="title-container"><h1 class="title">Registro de carreras</h1></div>
+<div class="title-container">
+  <h1 class="title">Registro de carreras</h1>
+</div>
 <div class="container" style="text-align: center">
-  <form [formGroup]="form" (submit)="aceptar()" class="example-form">
+  <form [formGroup]="form" (ngSubmit)="aceptar()" class="example-form">
     <mat-form-field class="example-full-width" *ngIf="edicionusers">
       <mat-label>Codigo</mat-label>
       <input matInput placeholder="Codigo" formControlName="codigo" readonly/>
@@ -10,30 +12,21 @@
     <mat-form-field class="example-full-width">
       <mat-label>Carrera:</mat-label>
       <input matInput placeholder="Carrera del usuario" formControlName="carrera" />
-      <mat-error *ngIf="form.get('carrera')?.hasError('required')"
-        >La carrera es obligatoria.</mat-error
-      >
+      <mat-error *ngIf="form.get('carrera')?.hasError('required')">
+        La carrera es obligatoria.
+      </mat-error>
     </mat-form-field>
-
     <br />
 
     <mat-form-field class="example-full-width">
       <mat-label>Usuario</mat-label>
-      <mat-select formControlName="usuario">
-        <mat-option
-          *ngFor="let us of listausuarios"
-          [value]="us.idUser"
-        >
-          {{ us.username }}
-        </mat-option>
-      </mat-select>
-      <mat-error *ngIf="form.get('usuario')?.hasError('required')"
-        >El usuario es obligatorio.</mat-error
-      >
+      <input matInput [value]="currentUser.username" disabled />
+      <input type="hidden" formControlName="usuario" />
     </mat-form-field>
     <br />
 
-    <button mat-raised-button color="primary">Aceptar</button>
+    <!-- Botones de acción -->
+    <button mat-raised-button color="primary" type="submit">Aceptar</button>
     <button mat-raised-button color="warn" routerLink="/carreras">
       Cancelar
     </button>

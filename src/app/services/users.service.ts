@@ -47,5 +47,13 @@ export class UsersService {
   listByRole(role: string): Observable<Users[]> {
     return this.http.get<Users[]>(`${this.url}/role/${role}`);
   }
+
+  findById(id: number): Observable<Users> {
+    return this.http.get<Users>(`${this.url}/${id}`);
+  }
+
+  userlogin(username: string): Observable<Users> {
+    return this.http.get<Users>(`${this.url}/nombreusuario?nombreuser=${username}`);
+  }
   
 }

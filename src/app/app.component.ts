@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RouterOutlet, RouterLink } from '@angular/router';
 import { PersonalitiesComponent } from './components/personalities/personalities.component';
 import { MatToolbarModule } from '@angular/material/toolbar'
@@ -26,6 +26,10 @@ import { NgIf } from '@angular/common';
 export class AppComponent {
   title = 'practiceAbilityHelp';
   role: string = '';
+  usuario: string = '';
+  joaquin: string='joaquin'
+  userId: string | null = null;
+
   constructor(private loginService: LoginService) {}
 
   cerrar() {
@@ -34,8 +38,12 @@ export class AppComponent {
 
   verificar() {
     this.role = this.loginService.showRole();
+    //this.usuario = this.loginService.userlogin(this.joaquin);
+    this.userId = this.loginService.showName();
+
     return this.loginService.verificar();
   }
+
   isADMIN() {
     return this.role === 'ADMIN';
   }
@@ -47,4 +55,6 @@ export class AppComponent {
   isSTUDENT() {
     return this.role === 'STUDENT';
   }
+
+
 }
