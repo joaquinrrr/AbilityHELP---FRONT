@@ -19,6 +19,7 @@ import { Users } from '../../../models/users';
 import { TypeInteraccion } from '../../../models/typeinteraction';
 import { UsersService } from '../../../services/users.service';
 import { ChatsService } from '../../../services/chats.service';
+import { LoginService } from '../../../services/login.service';
 
 @Component({
   selector: 'app-crearchats',
@@ -36,15 +37,15 @@ import { ChatsService } from '../../../services/chats.service';
   templateUrl: './crearchats.component.html',
   styleUrl: './crearchats.component.css'
 })
-export class CrearchatsComponent implements OnInit{
+export class CrearchatsComponent implements OnInit {
   form: FormGroup = new FormGroup({});
   c: Chats = new Chats();
+  currentUser: Users = new Users();
   listausuarios: Users[] = [];
   edicionchats: boolean = false;
   id: number = 0;
-  mindate = new Date()
+  mindate = new Date();
   maxDate = new Date(4000, 0, 1);
-
 
   constructor(
     private sU: UsersService,
@@ -52,57 +53,82 @@ export class CrearchatsComponent implements OnInit{
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private sC: ChatsService,
+    private sL: LoginService
   ) {}
 
   ngOnInit(): void {
-    this.route.params.subscribe((data: Params) => {
-      this.id = data['id'];
-      this.edicionchats = data['id'] != null;
-      this.init();
-    });
     this.form = this.formBuilder.group({
       codigo: [''],
       mensaje: ['', Validators.required],
-      fecha: ['', Validators.required],
-      usuarioenvia: ['', Validators.required],
+      fecha: [ new Date(), Validators.required], // Fecha actual y deshabilitada
+      usuarioenvia: [''], // Este campo se establecerá automáticamente
       usuariorecibe: ['', Validators.required],
     });
+
+    this.route.params.subscribe((data: Params) => {
+      this.id = +data['id'];
+      this.edicionchats = !!data['id'];
+      if (this.edicionchats) {
+        this.init();
+      }
+    });
+
+    const username = this.sL.showName();
+    if (username) {
+      this.sU.userlogin(username).subscribe({
+        next: (user) => {
+          this.currentUser = user;
+          this.form.patchValue({
+            usuarioenvia: this.currentUser.idUser
+          });
+        },
+        error: (err) => {
+          console.error('Error fetching user data', err);
+        }
+      });
+    }
+
     this.sU.list().subscribe((data) => {
       this.listausuarios = data;
     });
   }
+
   aceptar(): void {
     if (this.form.valid) {
-      this.c.idChat = this.form.value.codigo
-      this.c.message = this.form.value.mensaje
-      this.c.dateSend = this.form.value.fecha
-      this.c.idStudentSender.idUser = this.form.value.usuarioenvia
-      this.c.idStudentRecipient.idUser = this.form.value.usuariorecibe
-      if(this.edicionchats){
-        this.sC.update(this.c, this.c.idChat).subscribe((data) => {
+      const formData = this.form.value;
+      this.c.idChat = formData.codigo;
+      this.c.message = formData.mensaje;
+      this.c.dateSend = formData.fecha;
+      this.c.idStudentSender.idUser = formData.usuarioenvia;
+      this.c.idStudentRecipient.idUser = formData.usuariorecibe;
+
+      if (this.edicionchats) {
+        this.sC.update(this.c, this.c.idChat).subscribe(() => {
           this.sC.list().subscribe((data) => {
             this.sC.setList(data);
           });
+          this.router.navigate(['chats']);
         });
-      }else{
-        this.sC.insert(this.c).subscribe((data) => {
+      } else {
+        this.sC.insert(this.c).subscribe(() => {
           this.sC.list().subscribe((data) => {
             this.sC.setList(data);
           });
+          this.router.navigate(['chats']);
         });
       }
-    this.router.navigate(['chats']);
     }
   }
-  init() {
+
+  init(): void {
     if (this.edicionchats) {
       this.sC.listId(this.id).subscribe((data) => {
-        this.form = new FormGroup({
-          codigo: new FormControl(data.idChat),
-          mensaje: new FormControl(data.message),
-          fecha: new FormControl(data.dateSend),
-          usuarioenvia: new FormControl(data.idStudentSender.idUser),
-          usuariorecibe: new FormControl(data.idStudentRecipient.idUser),
+        this.form.patchValue({
+          codigo: data.idChat,
+          mensaje: data.message,
+          fecha: new Date(data.dateSend),
+          usuarioenvia: data.idStudentSender.idUser,
+          usuariorecibe: data.idStudentRecipient.idUser,
         });
       });
     }

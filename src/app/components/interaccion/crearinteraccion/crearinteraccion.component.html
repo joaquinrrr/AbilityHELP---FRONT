@@ -1,75 +1,66 @@
-<div class="title-container"><h1 class="title">Registro de interacciones</h1></div>
+<div class="title-container">
+  <h1 class="title">Registro de interacciones</h1>
+</div>
 <div class="container" style="text-align: center">
   <form [formGroup]="form" (submit)="aceptar()" class="example-form">
     <mat-form-field class="example-full-width" *ngIf="edicioninteraction">
       <mat-label>Codigo</mat-label>
-      <input matInput placeholder="Codigo" formControlName="codigo" />
+      <input matInput placeholder="Codigo" formControlName="codigo" readonly />
     </mat-form-field>
     <br />
-    
 
     <mat-form-field appearance="fill" class="example-full-width">
-        <input
-          matInput
-          placeholder="Ingrese fecha de interaccion"
-          [matDatepicker]="picker"
-          formControlName="fecha"
-          [min]="mindate"
-          [max]="maxDate"
-        />
-        <mat-hint>MM/DD/YYYY</mat-hint>
-        <mat-datepicker-toggle
-          matIconSuffix
-          [for]="picker"
-        ></mat-datepicker-toggle>
-        <mat-datepicker #picker></mat-datepicker>
-        <mat-error *ngIf="form.get('fecha')?.hasError('required')"
-          >La fecha es obligatoria.</mat-error
-        >
-      </mat-form-field>
-    <br/>
-
-
-    <mat-form-field class="example-full-width">
-      <mat-label>Usuario que envia</mat-label>
-      <mat-select formControlName="usuarioenvia">
-        <mat-option *ngFor="let usender of listarusuarios" [value]="usender.idUser">
-          {{ usender.username }}
-        </mat-option>
-      </mat-select>
-      <mat-error *ngIf="form.get('usuarioenvia')?.hasError('required')"
-        >El usuario que envia es obligatorio.</mat-error
+      <input
+        matInput
+        placeholder="Ingrese fecha de interaccion"
+        [matDatepicker]="picker"
+        formControlName="fecha"
+        [min]="mindate"
+        [max]="maxDate"
+      />
+      <mat-hint>MM/DD/YYYY</mat-hint>
+      <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+      <mat-error *ngIf="form.get('fecha')?.hasError('required')"
+        >La fecha es obligatoria.</mat-error
       >
     </mat-form-field>
     <br />
 
     <mat-form-field class="example-full-width">
-        <mat-label>Usuario que recibe</mat-label>
-        <mat-select formControlName="usuariorecibe">
-          <mat-option *ngFor="let urec of listarusuarios" [value]="urec.idUser">
-            {{ urec.username }}
-          </mat-option>
-        </mat-select>
-        <mat-error *ngIf="form.get('usuariorecibe')?.hasError('required')"
-          >El usuario que recibe es obligatorio.</mat-error
-        >
+      <mat-label>Usuario que envía</mat-label>
+      <input matInput [value]="currentUser.username" disabled />
+      <input type="hidden" formControlName="usuarioenvia" />
     </mat-form-field>
     <br />
 
     <mat-form-field class="example-full-width">
-        <mat-label>Tipo de interaccion</mat-label>
-        <mat-select formControlName="tipointeraccion">
-          <mat-option *ngFor="let ti of listatipointera" [value]="ti.id">
-            {{ ti.type }}
-          </mat-option>
-        </mat-select>
-        <mat-error *ngIf="form.get('tipointeraccion')?.hasError('required')"
-          >El tipo de interaccion es obligatorio.</mat-error
-        >
+      <mat-label>Usuario que recibe</mat-label>
+      <mat-select formControlName="usuariorecibe">
+        <mat-option *ngFor="let urec of listarusuarios" [value]="urec.idUser">
+          {{ urec.username }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="form.get('usuariorecibe')?.hasError('required')"
+        >El usuario que recibe es obligatorio.</mat-error
+      >
     </mat-form-field>
-
     <br />
-    <button mat-raised-button color="primary" >Aceptar</button>
+
+    <mat-form-field class="example-full-width">
+      <mat-label>Tipo de interaccion</mat-label>
+      <mat-select formControlName="tipointeraccion">
+        <mat-option *ngFor="let ti of listatipointera" [value]="ti.id">
+          {{ ti.type }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="form.get('tipointeraccion')?.hasError('required')"
+        >El tipo de interaccion es obligatorio.</mat-error
+      >
+    </mat-form-field>
+    <br />
+
+    <button mat-raised-button color="primary" type="submit">Aceptar</button>
     <button mat-raised-button color="warn" routerLink="/interacciones">
       Cancelar
     </button>

@@ -1,4 +1,6 @@
-<div class="title-container"><h1 class="title">Registro de interacciones</h1></div>
+<div class="title-container">
+  <h1 class="title">Registro de asignacion incidentes</h1>
+</div>
 <div class="container" style="text-align: center">
   <form [formGroup]="form" (submit)="aceptar()" class="example-form">
     <mat-form-field class="example-full-width" *ngIf="edicionasignarinci">
@@ -6,105 +8,97 @@
       <input matInput placeholder="Codigo" formControlName="codigo" />
     </mat-form-field>
     <br />
-    
+
     <mat-form-field appearance="fill" class="example-full-width">
-        <input
-          matInput
-          placeholder="Ingrese fecha de la asignacion del incidente"
-          [matDatepicker]="picker"
-          formControlName="fecha"
-          [min]="mindate"
-          [max]="maxDate"
-        />
-        <mat-hint>MM/DD/YYYY</mat-hint>
-        <mat-datepicker-toggle
-          matIconSuffix
-          [for]="picker"
-        ></mat-datepicker-toggle>
-        <mat-datepicker #picker></mat-datepicker>
-        <mat-error *ngIf="form.get('fecha')?.hasError('required')"
-          >La fecha es obligatoria.</mat-error
-        >
-      </mat-form-field>
-    <br/>
-
-    <mat-form-field class="example-full-width">
-        <mat-label>Estado</mat-label>
-        <mat-select formControlName="estado">
-          <mat-option *ngFor="let es of tiposdeestados" [value]="es.value">
-            {{ es.viewValue }}
-          </mat-option>
-        </mat-select>
-        <mat-error *ngIf="form.get('estado')?.hasError('required')"
-          >El estado es obligatorio.</mat-error
-        >
-    </mat-form-field>
-
-    <br />
-
-    <mat-form-field class="example-full-width">
-        <mat-label>Detalle:</mat-label>
-        <input matInput placeholder="Detalle" formControlName="detalle" />
-        <mat-error *ngIf="form.get('detalle')?.hasError('required')"
-          >El detalle es obligatorio.</mat-error
-        >
-    </mat-form-field>
-    <br />
-
-    <mat-form-field class="example-full-width">
-        <mat-label>Usuario administrador</mat-label>
-        <mat-select formControlName="admin">
-          <mat-option *ngFor="let usadmin of listaAdmins" [value]="usadmin.idUser">
-            {{ usadmin.username }}
-          </mat-option>
-        </mat-select>
-        <mat-error *ngIf="form.get('admin')?.hasError('required')"
-          >El usuario que envia es obligatorio.</mat-error
-        >
-      </mat-form-field>
-      <br />
-
-    <mat-form-field class="example-full-width">
-      <mat-label>Usuario que reporta</mat-label>
-      <mat-select formControlName="reportador">
-        <mat-option *ngFor="let usrep of listarusuarios" [value]="usrep.idUser">
-          {{ usrep.username }}
-        </mat-option>
-      </mat-select>
-      <mat-error *ngIf="form.get('reportador')?.hasError('required')"
-        >El usuario que reporta es obligatorio.</mat-error
+      <input
+        matInput
+        placeholder="Ingrese fecha de la asignacion del incidente"
+        [matDatepicker]="picker"
+        formControlName="fecha"
+        [min]="mindate"
+        [max]="maxDate"
+      />
+      <mat-hint>MM/DD/YYYY</mat-hint>
+      <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+      <mat-error *ngIf="form.get('fecha')?.hasError('required')"
+        >La fecha es obligatoria.</mat-error
       >
     </mat-form-field>
     <br />
 
     <mat-form-field class="example-full-width">
-        <mat-label>Usuario que es baneado</mat-label>
-        <mat-select formControlName="baneado">
-          <mat-option *ngFor="let usban of listarusuarios" [value]="usban.idUser">
-            {{ usban.username }}
-          </mat-option>
-        </mat-select>
-        <mat-error *ngIf="form.get('baneado')?.hasError('required')"
-          >El usuario que es baneado es obligatorio.</mat-error
-        >
+      <mat-label>Estado</mat-label>
+      <mat-select formControlName="estado">
+        <mat-option *ngFor="let es of tiposdeestados" [value]="es.value">
+          {{ es.viewValue }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="form.get('estado')?.hasError('required')"
+        >El estado es obligatorio.</mat-error
+      >
+    </mat-form-field>
+
+    <br />
+
+    <mat-form-field class="example-full-width">
+      <mat-label>Detalle:</mat-label>
+      <input matInput placeholder="Detalle" formControlName="detalle" />
+      <mat-error *ngIf="form.get('detalle')?.hasError('required')"
+        >El detalle es obligatorio.</mat-error
+      >
     </mat-form-field>
     <br />
 
     <mat-form-field class="example-full-width">
-        <mat-label>Incidente cometido</mat-label>
-        <mat-select formControlName="incidentes">
-          <mat-option *ngFor="let inc of listarincidentes" [value]="inc.id">
-            {{ inc.typeIncident }}
-          </mat-option>
-        </mat-select>
-        <mat-error *ngIf="form.get('incidentes')?.hasError('required')"
-          >El incidente es obligatorio.</mat-error
-        >
+      <mat-label>Usuario administrador</mat-label>
+      <mat-select formControlName="admin">
+        <mat-option *ngFor="let usadmin of listaAdmins" [value]="usadmin.idUser">
+          {{ usadmin.username }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="form.get('admin')?.hasError('required')"
+        >El usuario administrador es obligatorio.</mat-error
+      >
     </mat-form-field>
     <br />
 
-    
-    <button mat-raised-button color="primary" >Aceptar</button>
+    <!-- Usuario que reporta: No se puede seleccionar, se asigna automáticamente -->
+    <mat-form-field class="example-full-width">
+      <mat-label>Usuario que reporta</mat-label>
+        <input matInput [value]="currentUser.username" disabled />
+        <input type="hidden" formControlName="reportador" />
+    </mat-form-field>
+
+    <br />
+
+    <mat-form-field class="example-full-width">
+      <mat-label>Usuario que es baneado</mat-label>
+      <mat-select formControlName="baneado">
+        <mat-option *ngFor="let usban of listarusuarios" [value]="usban.idUser">
+          {{ usban.username }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="form.get('baneado')?.hasError('required')"
+        >El usuario baneado es obligatorio.</mat-error
+      >
+    </mat-form-field>
+    <br />
+
+    <mat-form-field class="example-full-width">
+      <mat-label>Incidente cometido</mat-label>
+      <mat-select formControlName="incidentes">
+        <mat-option *ngFor="let inc of listarincidentes" [value]="inc.id">
+          {{ inc.typeIncident }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="form.get('incidentes')?.hasError('required')"
+        >El incidente es obligatorio.</mat-error
+      >
+    </mat-form-field>
+    <br />
+
+    <button mat-raised-button color="primary">Aceptar</button>
     <button mat-raised-button color="warn" routerLink="/asignacion-incidentes">
       Cancelar
     </button>

@@ -18,7 +18,7 @@ import { Carreras } from '../../../models/degrees';
 import { Users } from '../../../models/users';
 import { UsersService } from '../../../services/users.service';
 import { DegreesService } from '../../../services/degrees.service';
-
+import { LoginService } from '../../../services/login.service';
 
 @Component({
   selector: 'app-crearcarreras',
@@ -36,12 +36,13 @@ import { DegreesService } from '../../../services/degrees.service';
     MatInputModule,
   ],
   templateUrl: './crearcarreras.component.html',
-  styleUrl: './crearcarreras.component.css'
+  styleUrls: ['./crearcarreras.component.css']
 })
+
 export class CrearcarrerasComponent implements OnInit {
   form: FormGroup = new FormGroup({});
   c: Carreras = new Carreras();
-  listausuarios: Users[] = [];
+  currentUser: Users = new Users();
   edicionusers: boolean = false;
   id: number = 0;
 
@@ -50,52 +51,74 @@ export class CrearcarrerasComponent implements OnInit {
     private router: Router,
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
-    private sC: DegreesService
-  ) {}
+    private sC: DegreesService,
+    private sL: LoginService
+  ) {
+    
+  }
 
   ngOnInit(): void {
-    this.route.params.subscribe((data: Params) => {
-      this.id = data['id'];
-      this.edicionusers = data['id'] != null;
-      this.init();
-    });
+    const username = this.sL.showName();
+    if (username) {
+      this.sU.userlogin(username).subscribe({
+        next: (user) => {
+          this.currentUser = user;
+          this.form.patchValue({
+            usuario: this.currentUser.idUser
+          });
+        },
+        error: (err) => {
+          console.error('Error fetching user data', err);
+        }
+      });
+    }
     this.form = this.formBuilder.group({
       codigo: [''],
       carrera: ['', Validators.required],
-      usuario: ['', Validators.required],
+      usuario: [''] 
     });
-    this.sU.list().subscribe((data) => {
-      this.listausuarios = data;
+    this.route.params.subscribe((data: Params) => {
+      this.id = +data['id'];
+      this.edicionusers = !!data['id'];
+      if (this.edicionusers) {
+        this.init();
+      }
     });
+    
   }
+
   aceptar(): void {
     if (this.form.valid) {
-      this.c.idCarrera = this.form.value.codigo
-      this.c.nameDegree = this.form.value.carrera
-      this.c.user.idUser = this.form.value.usuario
-      if(this.edicionusers){
-        this.sC.update(this.c, this.c.idCarrera).subscribe((data) => {
+      const formData = this.form.value;
+      this.c.idCarrera = formData.codigo;
+      this.c.nameDegree = formData.carrera;
+      this.c.user.idUser = formData.usuario; 
+
+      if (this.edicionusers) {
+        this.sC.update(this.c, this.c.idCarrera).subscribe(() => {
           this.sC.list().subscribe((data) => {
             this.sC.setList(data);
           });
+          this.router.navigate(['carreras']);
         });
-      }else{
-        this.sC.insert(this.c).subscribe((data) => {
+      } else {
+        this.sC.insert(this.c).subscribe(() => {
           this.sC.list().subscribe((data) => {
             this.sC.setList(data);
           });
+          this.router.navigate(['carreras']);
         });
       }
-    this.router.navigate(['carreras']);
     }
   }
-  init() {
+
+  init(): void {
     if (this.edicionusers) {
       this.sC.listId(this.id).subscribe((data) => {
-        this.form = new FormGroup({
-          codigo: new FormControl(data.idCarrera),
-          carrera: new FormControl(data.nameDegree),
-          usuario: new FormControl(data.user.idUser),
+        this.form.patchValue({
+          codigo: data.idCarrera,
+          carrera: data.nameDegree,
+          usuario: data.user.idUser
         });
       });
     }
