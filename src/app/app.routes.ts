@@ -1,3 +1,4 @@
+import { UserlandingComponent } from './userlanding/userlanding.component';
 import { Routes } from '@angular/router';
 import { PersonalitiesComponent } from './components/personalities/personalities.component';
 import { Gender } from './models/genders';
@@ -28,11 +29,13 @@ import { CrearasignacionincComponent } from './components/asignacionincidentes/c
 import { HomeComponent } from './components/home/home.component';
 import { segGuard } from './guard/seguridad.guard';
 import { LoginComponent } from './components/login/login.component';
+import { HomelandingComponent } from './components/homelanding/homelanding.component';
+import { CrearuserComponent } from './userlanding/crearuser/crearuser.component';
 
 export const routes: Routes = [
     {
         path: '',
-        redirectTo: 'login',
+        redirectTo: 'homelanding',
         pathMatch: 'full',
     },
     {
@@ -42,18 +45,30 @@ export const routes: Routes = [
     {
         path:'personalidades',component:PersonalitiesComponent,
         children:[
-            { path:'insertar',component:InsertarpersonalidadComponent },
             { path:'ediciones-personalidad/:id', component:InsertarpersonalidadComponent },
         ],
         canActivate: [segGuard], 
     },
+
+    {
+        path:'personalidades',component:PersonalitiesComponent,
+        children:[
+            { path:'insertar',component:InsertarpersonalidadComponent },
+        ],
+    },
+    {
+        path:'generos',component:GendersComponent,
+        children:[
+            { path:'ediciones-gender/:id', component:CreargenerosComponent },
+        ],
+        canActivate: [segGuard], 
+    },
+
     {
         path:'generos',component:GendersComponent,
         children:[
             { path:'insertar',component:CreargenerosComponent },
-            { path:'ediciones-gender/:id', component:CreargenerosComponent },
         ],
-        canActivate: [segGuard], 
     },
     {
         path:'usuarios',component:UsersComponent,
@@ -63,6 +78,21 @@ export const routes: Routes = [
         ],
         canActivate: [segGuard], 
     },
+    {
+        path:'userlanding',component:UserlandingComponent,
+        children:[
+            { path:'insertar',component:CrearuserComponent },
+        ],
+    },
+    {
+        path:'roles', component: RolesComponent,
+        children:[
+            { path:'insertar',component:CrearrolesComponent },
+            { path:'ediciones-roles/:id', component:CrearrolesComponent },
+        ],
+        canActivate: [segGuard], 
+    },
+
     {
         path:'roles', component: RolesComponent,
         children:[
@@ -135,6 +165,11 @@ export const routes: Routes = [
         ],
         canActivate: [segGuard], // solo construcciones, se debe agregar a cada uno
     },
+    {
+        path: 'homelanding',
+        component: HomelandingComponent,
+    },
+
     {
         path: 'homes',
         component: HomeComponent,

@@ -1,0 +1,208 @@
+/* Estilos generales */
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+header {
+    background: #333;
+    color: #fff;
+    padding: 10px 0;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+}
+
+header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header .logo {
+    font-size: 24px;
+}
+
+header nav ul {
+    display: flex;
+    list-style-type: none;
+}
+
+header nav ul li {
+    margin-left: 20px;
+}
+
+header nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+header nav ul li a:hover {
+    color: #f5f5f5;
+}
+
+.hero {
+    height: 100vh;
+    background: url('../img/grupo-personas-trabajando-plan-negocios-oficina_1303-15779.jpg') no-repeat center center/cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: #fff;
+}
+
+.hero h1 {
+    font-size: 3em;
+    margin-bottom: 20px;
+}
+
+.hero p {
+    font-size: 1.2em;
+    margin-bottom: 30px;
+}
+
+.hero .btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.hero .btn:hover {
+    background-color: #0056b3;
+}
+
+.services {
+    padding: 80px 0;
+    background-color: #f8f9fa;
+}
+
+.services h2 {
+    font-size: 2.5em;
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.services .service {
+    margin-bottom: 30px;
+}
+
+.services .service h3 {
+    font-size: 2em;
+    margin-bottom: 10px;
+}
+
+.nosotros {
+    padding: 80px 0;
+    background-color: #f8f9fa;
+}
+
+.nosotros h2 {
+    font-size: 2.5em;
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.nosotros .service {
+    margin-bottom: 30px;
+}
+
+.nosotros .service h3 {
+    font-size: 2em;
+    margin-bottom: 10px;
+}
+
+.about {
+    padding: 80px 0;
+    background-color: #fff;
+}
+
+.about h2 {
+    font-size: 2.5em;
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.contact {
+    padding: 80px 0;
+    background-color: #f8f9fa;
+    text-align: center;
+}
+
+.contact h2 {
+    font-size: 2.5em;
+    margin-bottom: 40px;
+}
+
+.contact form {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.contact form input,
+.contact form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.contact form button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.contact form button:hover {
+    background-color: #0056b3;
+}
+
+footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 20px 0;
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+}
+
+footer .social {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+}
+
+footer .social li {
+    margin: 0 10px;
+}
+
+footer .social li a {
+    color: #fff;
+    font-size: 24px;
+    transition: color 0.3s ease;
+}
+
+footer .social li a:hover {
+    color: #f5f5f5;
+}

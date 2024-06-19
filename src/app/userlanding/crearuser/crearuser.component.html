@@ -1,0 +1,64 @@
+    <div class="title-container">
+    <h1 class="title">Registro de usuarios</h1>
+    </div>
+    <div class="container" style="text-align: center">
+    <form [formGroup]="form" (submit)="aceptar()" class="example-form">
+        <mat-form-field class="example-full-width" *ngIf="edicionusers">
+        <mat-label>Codigo</mat-label>
+        <input matInput placeholder="Codigo" formControlName="codigo" readonly />
+        </mat-form-field>
+        <br />
+        <mat-form-field class="example-full-width">
+        <mat-label>Usuario:</mat-label>
+        <input matInput placeholder="Nombre de Usuario" formControlName="nombre" />
+        <mat-error *ngIf="form.get('nombre')?.hasError('required')">El nombre es obligatorio.</mat-error>
+        </mat-form-field>
+        <br />
+        <mat-form-field class="example-full-width">
+        <mat-label>Email:</mat-label>
+        <input matInput placeholder="Email del usuario" formControlName="email" />
+        <mat-error *ngIf="form.get('email')?.hasError('required')">El email es obligatorio.</mat-error>
+        </mat-form-field>
+        <br />
+        <mat-form-field class="example-full-width">
+        <mat-label>Edad:</mat-label>
+        <input matInput placeholder="Edad" formControlName="edad" />
+        <mat-error *ngIf="form.get('edad')?.hasError('required')">La edad es obligatoria.</mat-error>
+        <mat-error *ngIf="form.get('edad')?.hasError('min')">La edad mínima es 15.</mat-error>
+        <mat-error *ngIf="form.get('edad')?.hasError('max')">La edad máxima es 99.</mat-error>
+        <mat-error *ngIf="form.get('edad')?.hasError('pattern')">La edad no es válida.</mat-error>
+        </mat-form-field>
+        <br />
+        <mat-form-field class="example-full-width">
+        <mat-label>Contraseña:</mat-label>
+        <input [type]="hidePassword ? 'password' : 'text'" matInput placeholder="Contraseña" formControlName="contrasenia" />
+        <button mat-icon-button matSuffix (click)="togglePasswordVisibility()" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePassword">
+            <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+        <mat-error *ngIf="form.get('contrasenia')?.hasError('required')">La contraseña es obligatoria.</mat-error>
+        </mat-form-field>
+        <br />
+        <mat-form-field class="example-full-width">
+        <mat-label>Genero</mat-label>
+        <mat-select formControlName="genero">
+            <mat-option *ngFor="let gender of listageneros" [value]="gender.idGender">
+            {{ gender.nameGender }}
+            </mat-option>
+        </mat-select>
+        <mat-error *ngIf="form.get('genero')?.hasError('required')">El genero es obligatorio.</mat-error>
+        </mat-form-field>
+        <br />
+        <mat-form-field class="example-full-width">
+        <mat-label>Personalidad</mat-label>
+        <mat-select formControlName="personalidad">
+            <mat-option *ngFor="let personality of listapersonalidades" [value]="personality.idPersonality">
+            {{ personality.namePersonality }}
+            </mat-option>
+        </mat-select>
+        <mat-error *ngIf="form.get('personalidad')?.hasError('required')">La personalidad es obligatoria.</mat-error>
+        </mat-form-field>
+        <br />
+        <button mat-raised-button color="primary">Aceptar</button>
+        <button mat-raised-button color="warn" routerLink="/usuarios">Cancelar</button>
+    </form>
+    </div>
