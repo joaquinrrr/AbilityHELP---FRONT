@@ -23,6 +23,12 @@ body {
   font-family: 'Pacifico', cursive; /* Ejemplo de fuente llamativa */
 }
 
+.landing-header img {
+  width: 100%;
+  max-width: 400px;
+  margin: 20px 0;
+}
+
 
 .landing-header {
   margin-top: 50px;

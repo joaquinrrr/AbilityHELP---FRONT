@@ -2,11 +2,14 @@
   <!-- Encabezado -->
   <header class="landing-header">
     <h1 class="landing-title">¡Bienvenido, {{ username }}!</h1>
+    <img src="assets/logo.jpg" alt="Logo de la empresa" />
+
   </header>
 
   <!-- Sección de características -->
   <section class="landing-features">
     <h2 class="section-title">Descubre lo que puedes hacer</h2>
+    
     <div class="feature-row">
       <!-- Perfil -->
       <div class="feature-box" *ngIf="verificar()">
