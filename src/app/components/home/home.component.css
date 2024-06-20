@@ -1,0 +1,88 @@
+/* Global styles */
+body {
+  margin: 0;
+  font: 'Roboto', sans-serif;
+}
+
+/* Landing page styles */
+.landing-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 100vh;
+  background: white;
+  color: #1A237E; /* Dark blue color */
+  text-align: center;
+  padding: 0 20px;
+}
+
+.landing-title {
+  font-size: 6em;
+  margin: 20px 0;
+  font-family: 'Pacifico', cursive; /* Ejemplo de fuente llamativa */
+}
+
+
+.landing-header {
+  margin-top: 50px;
+}
+
+
+
+.landing-features {
+  margin: 50px 0;
+  width: 100%;
+}
+
+.landing-features h2 {
+  font-size: 2.5em;
+  margin: 20px 0;
+  margin-bottom: 30px;
+  color: #1A237E; /* Dark blue color */
+}
+
+.feature-row {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.feature-box {
+  background: #f0f0f0;
+  padding: 20px;
+  margin: 10px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  font-size: 1.2em;
+  width: 300px; /* Fixed width to make them inline */
+}
+
+
+.feature-box mat-icon {
+  margin-bottom: 10px;
+  color: #1A237E; /* Dark blue color */
+  font-weight: bold; /* Texto en negrita */
+
+}
+
+.landing-footer {
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  padding: 20px 0;
+  position: relative;
+  width: 100%;
+  bottom: 0;
+  margin-bottom: 20px;
+}
+
+.landing-footer p {
+  font-size: 0.9em;
+  margin: 0;
+  color: #fff;
+}
