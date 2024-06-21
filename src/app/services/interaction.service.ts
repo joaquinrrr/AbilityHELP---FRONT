@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { enviroment } from '../../enviroments/enviroment';
 import { Interaction } from '../models/interaction';
-import { Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import { InteractionwithStudentDTO } from '../models/interactionwithStudentDTO';
 
 const base_url = enviroment.base
 @Injectable({
@@ -34,4 +35,8 @@ export class InteractionService {
   eliminar(id: number) {
     return this.http.delete(`${this.url}/${id}`);
   }
+  getInteractionStudent(): Observable<InteractionwithStudentDTO[]> {
+    return this.http.get<InteractionwithStudentDTO[]>(`${this.url}/interactionUsers`);
+  }
+
 }

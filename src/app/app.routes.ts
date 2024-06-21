@@ -34,6 +34,9 @@ import { CrearuserComponent } from './userlanding/crearuser/crearuser.component'
 import { ReportesComponent } from './components/reportes/reportes.component';
 import { CantidadincidentestateComponent } from './components/reportes/cantidadincidentestate/cantidadincidentestate.component';
 import { CantidadUsuarioIncidentesComponent } from './components/reportes/cantidad-usuario-incidentes/cantidad-usuario-incidentes.component';
+import { CantidadpersonalidadcarreraestudianteComponent } from './components/reportes/cantpersocarrest/cantidadpersonalidadcarreraestudiante.component';
+import { InteraccionestudiantereportComponent } from './components/reportes/interaccionestudiantereport/interaccionestudiantereport.component';
+import { PromedioReunionStudentComponent } from './components/reportes/promedio-reunion-student/promedio-reunion-student.component';
 
 export const routes: Routes = [
     {
@@ -178,6 +181,9 @@ export const routes: Routes = [
         children:[
           { path: 'cantidad-incidentes-state', component: CantidadincidentestateComponent },
           { path: 'cantidad-student-incidente', component: CantidadUsuarioIncidentesComponent },
+          { path: 'cantidad-perso-degree-student', component: CantidadpersonalidadcarreraestudianteComponent },
+          { path: 'interaccion-estudiante', component: InteraccionestudiantereportComponent },
+          { path: 'promedio-reunion-estudiante', component: PromedioReunionStudentComponent },
         ]
       },
 

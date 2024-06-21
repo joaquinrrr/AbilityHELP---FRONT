@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { enviroment } from '../../enviroments/enviroment';
 import { Meetings } from '../models/meetings';
-import { Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import { AverageMeetStudentDTO } from '../models/averageMeetStudentDTO';
 
 
 const base_url = enviroment.base
@@ -34,5 +35,8 @@ export class MeetingsService {
   }
   eliminar(id: number) {
     return this.http.delete(`${this.url}/${id}`);
+  }
+  getAverageMeetStudent(): Observable<AverageMeetStudentDTO[]> {
+    return this.http.get<AverageMeetStudentDTO[]>(`${this.url}/promedioReunionUsuario`);
   }
 }
