@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ChartDataset, ChartType } from 'chart.js';
 import { BaseChartDirective } from 'ng2-charts';
 import { AssignincidentsService } from '../../../services/assignincidents.service';
@@ -10,7 +10,7 @@ import { AssignincidentsService } from '../../../services/assignincidents.servic
   templateUrl: './cantidad-usuario-incidentes.component.html',
   styleUrl: './cantidad-usuario-incidentes.component.css'
 })
-export class CantidadUsuarioIncidentesComponent {
+export class CantidadUsuarioIncidentesComponent implements OnInit{
   barChartOptions = {
     responsive: true,
   };
