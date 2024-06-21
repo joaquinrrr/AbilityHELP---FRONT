@@ -33,6 +33,7 @@ import { HomelandingComponent } from './components/homelanding/homelanding.compo
 import { CrearuserComponent } from './userlanding/crearuser/crearuser.component';
 import { ReportesComponent } from './components/reportes/reportes.component';
 import { CantidadincidentestateComponent } from './components/reportes/cantidadincidentestate/cantidadincidentestate.component';
+import { CantidadUsuarioIncidentesComponent } from './components/reportes/cantidad-usuario-incidentes/cantidad-usuario-incidentes.component';
 
 export const routes: Routes = [
     {
@@ -175,9 +176,8 @@ export const routes: Routes = [
         path: 'reportes',
         component: ReportesComponent,
         children:[
-          {
-            path: 'cantidad-incidentes-state', component: CantidadincidentestateComponent
-          },
+          { path: 'cantidad-incidentes-state', component: CantidadincidentestateComponent },
+          { path: 'cantidad-student-incidente', component: CantidadUsuarioIncidentesComponent },
         ]
       },
 
