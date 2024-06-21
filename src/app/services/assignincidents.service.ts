@@ -2,7 +2,9 @@ import { Injectable } from '@angular/core';
 import { enviroment } from '../../enviroments/enviroment';
 import { AssignIncidents } from '../models/assignincident';
 import { HttpClient } from '@angular/common/http';
-import { Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
+import { AssignIncidentCountDTO } from '../models/assignIncidentCount';
+import { QuantityIncidentState } from '../models/quantityIncidentState';
 
 const base_url = enviroment.base
 @Injectable({
@@ -33,5 +35,11 @@ export class AssignincidentsService {
   }
   eliminar(id: number) {
     return this.http.delete(`${this.url}/${id}`);
+  }
+  getIncidentCount(): Observable<AssignIncidentCountDTO[]>{
+    return this.http.get<AssignIncidentCountDTO[]>(`${this.url}/incidentesOcurridos`);
+  }
+  getQuantityIncidentState(): Observable<QuantityIncidentState[]>{
+    return this.http.get<QuantityIncidentState[]>(`${this.url}/cantidadIncidentesPorEstado`);
   }
 }

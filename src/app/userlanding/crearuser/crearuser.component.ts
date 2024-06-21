@@ -105,7 +105,7 @@ export class CrearuserComponent {
       this.u.personality.idPersonality = this.form.value.personalidad
 
       if (this.edicionusers) {
-        this.sU.update(this.u).subscribe(() => {
+        this.sU.update(this.u, this.u.idUser).subscribe(() => {
           this.sU.list().subscribe((data) => {
             this.sU.setList(data);
           });

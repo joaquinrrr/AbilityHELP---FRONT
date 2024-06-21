@@ -42,6 +42,9 @@
   <button mat-menu-item [matMenuTriggerFor]="menuAsigancionInc" *ngIf="isADMIN()" class="custom-button">
     <mat-icon>assignment</mat-icon><span class="button-text">Asignación Incidentes</span>
   </button>
+  <button mat-button [matMenuTriggerFor]="menuReport">
+    <mat-icon>file_copy</mat-icon> Reportes
+  </button>
 
 </mat-toolbar>
 
@@ -151,6 +154,12 @@
   <button mat-menu-item routerLink="/asignacion-incidentes/insertar">
     <mat-icon>add</mat-icon>Insertar Asignación incidentes
   </button>
+</mat-menu>
+
+<mat-menu #menuReport="matMenu">
+  <button mat-menu-item routerLink="/reportes">Conteo de asignacion incidentes</button>
+  <button mat-menu-item routerLink="/reportes/cantidad-incidentes-state">Cantidad incidentes por estado</button>
+  <!-- Agrega más elementos de menú si es necesario -->
 </mat-menu>
 
 <mat-menu #menuSalir="matMenu">

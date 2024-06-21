@@ -31,6 +31,8 @@ import { segGuard } from './guard/seguridad.guard';
 import { LoginComponent } from './components/login/login.component';
 import { HomelandingComponent } from './components/homelanding/homelanding.component';
 import { CrearuserComponent } from './userlanding/crearuser/crearuser.component';
+import { ReportesComponent } from './components/reportes/reportes.component';
+import { CantidadincidentestateComponent } from './components/reportes/cantidadincidentestate/cantidadincidentestate.component';
 
 export const routes: Routes = [
     {
@@ -169,6 +171,15 @@ export const routes: Routes = [
         path: 'homelanding',
         component: HomelandingComponent,
     },
+    {
+        path: 'reportes',
+        component: ReportesComponent,
+        children:[
+          {
+            path: 'cantidad-incidentes-state', component: CantidadincidentestateComponent
+          },
+        ]
+      },
 
     {
         path: 'homes',
