@@ -14,22 +14,22 @@
           {{ usu.username }}
         </mat-option>
       </mat-select>
-      <mat-error *ngIf="form.get('usuario')?.hasError('required')"
-        >El usuario obligatorio.</mat-error
-      >
+      <mat-error *ngIf="form.get('usuario')?.hasError('required')">
+        El usuario es obligatorio.
+      </mat-error>
     </mat-form-field>
     <br />
 
     <mat-form-field class="example-full-width">
-        <mat-label>Horarios</mat-label>
-        <mat-select formControlName="horario">
-          <mat-option *ngFor="let h of listahorarios" [value]="h.idSchedule">
-            {{ h.weekDay }} - {{ h.startHour }} - {{ h.finishHour }}
-          </mat-option>
-        </mat-select>
-        <mat-error *ngIf="form.get('horario')?.hasError('required')"
-          >El horario es obligatorio.</mat-error
-        >
+      <mat-label>Horarios</mat-label>
+      <mat-select formControlName="horario">
+        <mat-option *ngFor="let h of listahorarios" [value]="h.idSchedule">
+          {{ h.weekDay }} - {{ h.startHour }} - {{ h.finishHour }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="form.get('horario')?.hasError('required')">
+        El horario es obligatorio.
+      </mat-error>
     </mat-form-field>
 
     <br />
