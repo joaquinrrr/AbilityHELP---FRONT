@@ -12,11 +12,12 @@ const base_url = enviroment.base;
 })
 export class LoginService {
   private url = `${base_url}/User`;
+  private urllog = `${base_url}/login`;
 
   constructor(private http: HttpClient) {}
 
   login(request: JwtRequest) {
-    return this.http.post('http://localhost:8082/login', request);
+    return this.http.post(this.urllog, request);
   }
   verificar() {
     let token = sessionStorage.getItem('token');

@@ -22,8 +22,8 @@ export const appConfig: ApplicationConfig = {
       JwtModule.forRoot({
         config: {
           tokenGetter: tokenGetter,
-          allowedDomains: ['localhost:8082'],
-          disallowedRoutes: ['http://localhost:8082/login/forget'],
+          allowedDomains: ['localhost:8082', 'abilityhelp.onrender.com'],
+          disallowedRoutes: ['http://localhost:8082/login/forget', 'https://abilityhelp.onrender.com/login/forget'],
         },
       })
     ),
