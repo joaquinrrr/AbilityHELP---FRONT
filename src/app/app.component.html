@@ -160,14 +160,14 @@
   <button mat-menu-item routerLink="/reportes">Conteo de asignacion incidentes</button>
   <button mat-menu-item routerLink="/reportes/cantidad-incidentes-state">Cantidad incidentes por estado</button>
   <button mat-menu-item routerLink="/reportes/cantidad-student-incidente">Cantidad Incidentes por usuario</button>
-  <button mat-menu-item routerLink="/reportes/cantidad-perso-degree-student">Cantidad Personalidades por Carrera y Estudiantes</button>
-  <button mat-menu-item routerLink="/reportes/interaccion-estudiante">Mostrar interaccion entre estudiantes</button>
+  <button mat-menu-item routerLink="/reportes/cantidad-perso-degree-student" *ngIf="isADMIN()">Cantidad Personalidades por Carrera y Estudiantes</button>
+  <button mat-menu-item routerLink="/reportes/interaccion-estudiante" *ngIf="isADMIN()">Mostrar interaccion entre estudiantes</button>
   <button mat-menu-item routerLink="/reportes/promedio-reunion-estudiante">Promedio de reunion de estudiantes</button>
-  <button mat-menu-item routerLink="/reportes/cantidad-rol-estudiante">Cantidad de usuarios por rol</button>
-  <button mat-menu-item routerLink="/reportes/cantidad-reuniones-mes">Cantidad de reuniones por mes</button>
-  <button mat-menu-item routerLink="/reportes/cantidad-reuniones-por-coach">Cantidad de reuniones por coach</button>
-  <button mat-menu-item routerLink="/reportes/cantidad-incidentes-mes">Cantidad de incidentes por mes</button>
-  <button mat-menu-item routerLink="/reportes/incidentes-usuario">Cantidad de incidentes realizados por usuario</button>
+  <button mat-menu-item routerLink="/reportes/cantidad-rol-estudiante" *ngIf="isADMIN()">Cantidad de usuarios por rol</button>
+  <button mat-menu-item routerLink="/reportes/cantidad-reuniones-mes" *ngIf="isADMIN() || isCOACH()">Cantidad de reuniones por mes</button>
+  <button mat-menu-item routerLink="/reportes/cantidad-reuniones-por-coach" *ngIf="isADMIN() || isCOACH()">Cantidad de reuniones por coach</button>
+  <button mat-menu-item routerLink="/reportes/cantidad-incidentes-mes" *ngIf="isADMIN()">Cantidad de incidentes por mes</button>
+  <button mat-menu-item routerLink="/reportes/incidentes-usuario" *ngIf="isADMIN() || isCOACH()">Incidentes realizados por usuario</button>
   <button mat-menu-item routerLink="/reportes/reunion-usuario">Reuniones por Usuario</button>
 
   <!-- Agrega más elementos de menú si es necesario -->
