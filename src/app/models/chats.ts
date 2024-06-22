@@ -6,4 +6,4 @@ export class Chats{
     dateSend: Date = new Date(Date.now())
     idStudentSender: Users = new Users()
     idStudentRecipient: Users = new Users()
-}
+} //AAAAA//
