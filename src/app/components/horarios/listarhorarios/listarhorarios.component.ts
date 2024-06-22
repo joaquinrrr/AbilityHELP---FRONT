@@ -10,6 +10,7 @@ import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatButtonModule } from '@angular/material/button';
 import { Schedules } from '../../../models/schedules';
 import { SchedulesService } from '../../../services/schedules.service';
+import { AppComponent } from '../../../app.component';
 
 @Component({
   selector: 'app-listarhorarios',
@@ -35,7 +36,7 @@ export class ListarhorariosComponent implements OnInit, AfterViewInit {
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor(private sS: SchedulesService){}
+  constructor(private sS: SchedulesService, private aPP: AppComponent){}
   ngOnInit(): void {
     this.sS.list().subscribe((data)=>{ //agrega los datos en el data source
       this.dataSource = new MatTableDataSource(this.sortSchedules(data));
@@ -59,5 +60,15 @@ export class ListarhorariosComponent implements OnInit, AfterViewInit {
 
   sortSchedules(horariosss: Schedules[]): Schedules[] {
     return horariosss.sort((a, b) => a.idSchedule - b.idSchedule);
+  }
+  
+  isADMIN(): boolean {
+    return this.aPP.isADMIN();
+  }
+  isCOACH(): boolean {
+    return this.aPP.isCOACH();
+  }
+  isSTUDENT(): boolean {
+    return this.aPP.isSTUDENT();
   }
 }

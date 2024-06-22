@@ -10,6 +10,7 @@ import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatButtonModule } from '@angular/material/button';
 import { Interaction } from '../../../models/interaction';
 import { InteractionService } from '../../../services/interaction.service';
+import { AppComponent } from '../../../app.component';
 
 @Component({
   selector: 'app-listarinteraccion',
@@ -35,7 +36,7 @@ export class ListarinteraccionComponent implements OnInit, AfterViewInit{
   dataSource: MatTableDataSource<Interaction>=new MatTableDataSource();
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor(private sI:InteractionService){}
+  constructor(private sI:InteractionService, private aPP: AppComponent){}
   ngOnInit(): void {
     this.sI.list().subscribe((data)=>{ //agrega los datos en el data source
       this.dataSource = new MatTableDataSource(this.sortGenders(data));
@@ -59,5 +60,15 @@ export class ListarinteraccionComponent implements OnInit, AfterViewInit{
 
   sortGenders(interaction: Interaction[]): Interaction[] {
     return interaction.sort((a, b) => a.id - b.id);
+  }
+
+  isADMIN(): boolean {
+    return this.aPP.isADMIN();
+  }
+  isCOACH(): boolean {
+    return this.aPP.isCOACH();
+  }
+  isSTUDENT(): boolean {
+    return this.aPP.isSTUDENT();
   }
 }

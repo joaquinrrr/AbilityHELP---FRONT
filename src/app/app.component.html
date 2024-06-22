@@ -6,28 +6,28 @@
   <button mat-button [matMenuTriggerFor]="menuSalir" class="custom-button">
     <mat-icon>person</mat-icon><span class="button-text">Perfil</span>
   </button>
-  <button mat-menu-item [matMenuTriggerFor]="menuPersonalidades" *ngIf="isADMIN()" class="custom-button">
+  <button mat-menu-item [matMenuTriggerFor]="menuPersonalidades" class="custom-button">
     <mat-icon>face</mat-icon><span class="button-text">Personalidades</span>
   </button>
-  <button mat-menu-item [matMenuTriggerFor]="menuGeneros" *ngIf="isADMIN()" class="custom-button">
+  <button mat-menu-item [matMenuTriggerFor]="menuGeneros" class="custom-button">
     <mat-icon>wc</mat-icon><span class="button-text">Generos</span>
   </button>
   <button mat-menu-item [matMenuTriggerFor]="menuUsuarios" class="custom-button">
     <mat-icon>people</mat-icon><span class="button-text">Usuarios</span>
   </button>
-  <button mat-menu-item [matMenuTriggerFor]="menuRoles" *ngIf="isADMIN()" class="custom-button">
+  <button mat-menu-item [matMenuTriggerFor]="menuRoles" class="custom-button">
     <mat-icon>assignment_ind</mat-icon><span class="button-text">Roles</span>
   </button>
   <button mat-menu-item [matMenuTriggerFor]="menuCarreras" class="custom-button">
     <mat-icon>school</mat-icon><span class="button-text">Carreras</span>
   </button>
-  <button mat-menu-item [matMenuTriggerFor]="menuIncidentes" *ngIf="isADMIN()" class="custom-button">
+  <button mat-menu-item [matMenuTriggerFor]="menuIncidentes" class="custom-button">
     <mat-icon>report_problem</mat-icon><span class="button-text">Incidentes</span>
   </button>
-  <button mat-menu-item [matMenuTriggerFor]="menuTipoInteracciones" *ngIf="isADMIN()" class="custom-button">
+  <button mat-menu-item [matMenuTriggerFor]="menuTipoInteracciones" class="custom-button">
     <mat-icon>psychology</mat-icon><span class="button-text">Tipo de Interacciones</span>
   </button>
-  <button mat-menu-item [matMenuTriggerFor]="menuInteracciones" class="custom-button">
+  <button mat-menu-item [matMenuTriggerFor]="menuInteracciones"  class="custom-button">
     <mat-icon>question_answer</mat-icon><span class="button-text">Interacciones</span>
   </button>
   <button mat-menu-item [matMenuTriggerFor]="menuChat" class="custom-button">
@@ -36,10 +36,10 @@
   <button mat-menu-item [matMenuTriggerFor]="menuHorarios" class="custom-button">
     <mat-icon>schedule</mat-icon><span class="button-text">Horarios</span>
   </button>
-  <button mat-menu-item [matMenuTriggerFor]="menuReuniones" *ngIf="isSTUDENT()" class="custom-button">
+  <button mat-menu-item [matMenuTriggerFor]="menuReuniones" class="custom-button">
     <mat-icon>meeting_room</mat-icon><span class="button-text">Reuniones</span>
   </button>
-  <button mat-menu-item [matMenuTriggerFor]="menuAsigancionInc" *ngIf="isADMIN()" class="custom-button">
+  <button mat-menu-item [matMenuTriggerFor]="menuAsigancionInc" class="custom-button">
     <mat-icon>assignment</mat-icon><span class="button-text">Asignación Incidentes</span>
   </button>
   <button mat-button [matMenuTriggerFor]="menuReport">
@@ -52,7 +52,7 @@
   <button mat-menu-item routerLink="/personalidades">
     <mat-icon>list</mat-icon>Listar
   </button>
-  <button mat-menu-item routerLink="/personalidades/insertar">
+  <button mat-menu-item routerLink="/personalidades/insertar" *ngIf="isADMIN()">
     <mat-icon>add</mat-icon>Insertar Personalidad
   </button>
 </mat-menu>
@@ -61,7 +61,7 @@
   <button mat-menu-item routerLink="/generos">
     <mat-icon>list</mat-icon>Listar
   </button>
-  <button mat-menu-item routerLink="/generos/insertar">
+  <button mat-menu-item routerLink="/generos/insertar" *ngIf="isADMIN()">
     <mat-icon>add</mat-icon>Insertar Género
   </button>
 </mat-menu>
@@ -79,7 +79,7 @@
   <button mat-menu-item routerLink="/roles">
     <mat-icon>list</mat-icon>Listar
   </button>
-  <button mat-menu-item routerLink="/roles/insertar">
+  <button mat-menu-item routerLink="/roles/insertar" *ngIf="isADMIN()" >
     <mat-icon>add</mat-icon>Insertar Roles
   </button>
 </mat-menu>
@@ -97,7 +97,7 @@
   <button mat-menu-item routerLink="/incidentes">
     <mat-icon>list</mat-icon>Listar
   </button>
-  <button mat-menu-item routerLink="/incidentes/insertar">
+  <button mat-menu-item routerLink="/incidentes/insertar" *ngIf="isADMIN()">
     <mat-icon>add</mat-icon>Insertar Incidente
   </button>
 </mat-menu>
@@ -106,7 +106,7 @@
   <button mat-menu-item routerLink="/tipo-interacciones">
     <mat-icon>list</mat-icon>Listar
   </button>
-  <button mat-menu-item routerLink="/tipo-interacciones/insertar">
+  <button mat-menu-item routerLink="/tipo-interacciones/insertar" *ngIf="isADMIN()">
     <mat-icon>add</mat-icon>Insertar Tipo de Interaccion
   </button>
 </mat-menu>
@@ -115,7 +115,7 @@
   <button mat-menu-item routerLink="/interacciones">
     <mat-icon>list</mat-icon>Listar
   </button>
-  <button mat-menu-item routerLink="/interacciones/insertar">
+  <button mat-menu-item routerLink="/interacciones/insertar" *ngIf="isSTUDENT()">
     <mat-icon>add</mat-icon>Insertar Interacciones
   </button>
 </mat-menu>
@@ -133,7 +133,7 @@
   <button mat-menu-item routerLink="/horarios">
     <mat-icon>list</mat-icon>Listar
   </button>
-  <button mat-menu-item routerLink="/horarios/insertar">
+  <button mat-menu-item routerLink="/horarios/insertar" *ngIf="isCOACH()">
     <mat-icon>add</mat-icon>Insertar Horario
   </button>
 </mat-menu>
@@ -142,7 +142,7 @@
   <button mat-menu-item routerLink="/reuniones">
     <mat-icon>list</mat-icon>Listar
   </button>
-  <button mat-menu-item routerLink="/reuniones/insertar">
+  <button mat-menu-item routerLink="/reuniones/insertar" *ngIf="isSTUDENT()">
     <mat-icon>add</mat-icon>Insertar Reuniones
   </button>
 </mat-menu>

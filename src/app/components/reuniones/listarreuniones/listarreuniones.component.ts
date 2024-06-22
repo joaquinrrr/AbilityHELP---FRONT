@@ -10,6 +10,7 @@ import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatButtonModule } from '@angular/material/button';
 import { Meetings } from '../../../models/meetings';
 import { MeetingsService } from '../../../services/meetings.service';
+import { AppComponent } from '../../../app.component';
 
 @Component({
   selector: 'app-listarreuniones',
@@ -34,7 +35,7 @@ export class ListarreunionesComponent implements OnInit{
   dataSource: MatTableDataSource<Meetings>=new MatTableDataSource();
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor(private sM:MeetingsService){}
+  constructor(private sM:MeetingsService, private aPP: AppComponent){}
   ngOnInit(): void {
     this.sM.list().subscribe((data)=>{ //agrega los datos en el data source
       this.dataSource = new MatTableDataSource(this.sortGenders(data));
@@ -58,5 +59,15 @@ export class ListarreunionesComponent implements OnInit{
 
   sortGenders(meetingsss: Meetings[]): Meetings[] {
     return meetingsss.sort((a, b) => a.idMeet - b.idMeet);
+  }
+
+  isADMIN(): boolean {
+    return this.aPP.isADMIN();
+  }
+  isCOACH(): boolean {
+    return this.aPP.isCOACH();
+  }
+  isSTUDENT(): boolean {
+    return this.aPP.isSTUDENT();
   }
 }

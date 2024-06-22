@@ -17,6 +17,7 @@
             <button
               mat-raised-button
               color="primary"
+              *ngIf="isSTUDENT()"
               [routerLink]="['ediciones-interacciones', element.id]"
             >
               <mat-icon>edit</mat-icon>
@@ -24,6 +25,7 @@
             <button
               mat-raised-button
               color="warn"
+              *ngIf="isSTUDENT() || isADMIN()"
               (click)="eliminar(element.id)"
             >
               <mat-icon>delete_sweep</mat-icon>

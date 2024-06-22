@@ -8,6 +8,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { Roles } from '../../../models/roles';
 import { RolesService } from '../../../services/roles.service';
+import { AppComponent } from '../../../app.component';
 
 @Component({
   selector: 'app-listarroles',
@@ -35,7 +36,7 @@ export class ListarrolesComponent implements OnInit {
   ];
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor(private sR: RolesService) {}
+  constructor(private sR: RolesService, private aPP: AppComponent) {}
   ngOnInit(): void {
     this.sR.list().subscribe((data) => {
       this.dataSource = new MatTableDataSource(data);
@@ -53,5 +54,13 @@ export class ListarrolesComponent implements OnInit {
       });
     });
   }
-
+  isADMIN(): boolean {
+    return this.aPP.isADMIN();
+  }
+  isCOACH(): boolean {
+    return this.aPP.isCOACH();
+  }
+  isSTUDENT(): boolean {
+    return this.aPP.isSTUDENT();
+  }
 }

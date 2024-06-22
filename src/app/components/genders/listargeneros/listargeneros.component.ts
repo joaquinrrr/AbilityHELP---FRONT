@@ -10,6 +10,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatButtonModule } from '@angular/material/button';
+import { AppComponent } from '../../../app.component';
 
 @Component({
   selector: 'app-listargeneros',
@@ -33,7 +34,7 @@ export class ListargenerosComponent implements OnInit, AfterViewInit{
   dataSource: MatTableDataSource<Gender>=new MatTableDataSource();
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor(private sG:GendersService){}
+  constructor(private sG:GendersService, private aPP: AppComponent){}
   ngOnInit(): void {
     this.sG.list().subscribe((data)=>{ //agrega los datos en el data source
       this.dataSource = new MatTableDataSource(this.sortGenders(data));
@@ -57,5 +58,15 @@ export class ListargenerosComponent implements OnInit, AfterViewInit{
 
   sortGenders(genders: Gender[]): Gender[] {
     return genders.sort((a, b) => a.idGender - b.idGender);
+  }
+
+  isADMIN(): boolean {
+    return this.aPP.isADMIN();
+  }
+  isCOACH(): boolean {
+    return this.aPP.isCOACH();
+  }
+  isSTUDENT(): boolean {
+    return this.aPP.isSTUDENT();
   }
 }

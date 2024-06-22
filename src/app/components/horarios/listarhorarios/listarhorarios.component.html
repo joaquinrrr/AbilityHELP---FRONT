@@ -17,6 +17,7 @@
             <button
               mat-raised-button
               color="primary"
+              *ngIf="isADMIN() || isCOACH()"
               [routerLink]="['ediciones-horarios', element.idSchedule]"
             >
               <mat-icon>edit</mat-icon>
@@ -24,6 +25,7 @@
             <button
               mat-raised-button
               color="warn"
+              *ngIf="isADMIN() || isCOACH()"
               (click)="eliminar(element.idSchedule)"
             >
               <mat-icon>delete_sweep</mat-icon>
