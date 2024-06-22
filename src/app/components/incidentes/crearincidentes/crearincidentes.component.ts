@@ -94,3 +94,6 @@ export class CrearincidentesComponent implements OnInit{
     }
   }
 }
+
+
+//Creacion de inserts//
