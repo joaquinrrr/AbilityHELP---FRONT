@@ -35,3 +35,4 @@ export class GendersService {
     return this.http.delete(`${this.url}/${id}`);
   }
 }
+ //gender class entity///
