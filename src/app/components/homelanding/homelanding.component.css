@@ -21,9 +21,6 @@ header {
     width: 100%;
     top: 0;
     z-index: 1000;
-}
-
-header .container {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -35,7 +32,9 @@ header .logo {
 
 header nav ul {
     display: flex;
-    list-style-type: none;
+    list-style: none;
+    margin: 0;
+    padding: 0;
 }
 
 header nav ul li {
@@ -45,7 +44,7 @@ header nav ul li {
 header nav ul li a {
     color: #fff;
     text-decoration: none;
-    transition: color 0.3s ease;
+    transition: color 0.3s;
 }
 
 header nav ul li a:hover {
@@ -73,79 +72,35 @@ header nav ul li a:hover {
 }
 
 .hero .btn {
-    display: inline-block;
     padding: 10px 20px;
-    background-color: #007bff;
+    background: #007bff;
     color: #fff;
     text-decoration: none;
     border-radius: 5px;
-    transition: background-color 0.3s ease;
+    transition: background 0.3s;
 }
 
 .hero .btn:hover {
-    background-color: #0056b3;
+    background: #0056b3;
 }
 
-.services {
+.services, .nosotros, .about, .contact {
     padding: 80px 0;
-    background-color: #f8f9fa;
+    text-align: center;
 }
 
-.services h2 {
+.services h2, .nosotros h2, .about h2, .contact h2 {
     font-size: 2.5em;
-    text-align: center;
     margin-bottom: 40px;
 }
 
-.services .service {
+.service {
     margin-bottom: 30px;
 }
 
-.services .service h3 {
+.service h3 {
     font-size: 2em;
     margin-bottom: 10px;
-}
-
-.nosotros {
-    padding: 80px 0;
-    background-color: #f8f9fa;
-}
-
-.nosotros h2 {
-    font-size: 2.5em;
-    text-align: center;
-    margin-bottom: 40px;
-}
-
-.nosotros .service {
-    margin-bottom: 30px;
-}
-
-.nosotros .service h3 {
-    font-size: 2em;
-    margin-bottom: 10px;
-}
-
-.about {
-    padding: 80px 0;
-    background-color: #fff;
-}
-
-.about h2 {
-    font-size: 2.5em;
-    text-align: center;
-    margin-bottom: 40px;
-}
-
-.contact {
-    padding: 80px 0;
-    background-color: #f8f9fa;
-    text-align: center;
-}
-
-.contact h2 {
-    font-size: 2.5em;
-    margin-bottom: 40px;
 }
 
 .contact form {
@@ -153,8 +108,7 @@ header nav ul li a:hover {
     margin: 0 auto;
 }
 
-.contact form input,
-.contact form textarea {
+.contact form input, .contact form textarea {
     width: 100%;
     padding: 10px;
     margin-bottom: 20px;
@@ -164,20 +118,20 @@ header nav ul li a:hover {
 
 .contact form button {
     padding: 10px 20px;
-    background-color: #007bff;
+    background: #007bff;
     color: #fff;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: background 0.3s;
 }
 
 .contact form button:hover {
-    background-color: #0056b3;
+    background: #0056b3;
 }
 
 footer {
-    background-color: #333;
+    background: #333;
     color: #fff;
     text-align: center;
     padding: 20px 0;
@@ -187,10 +141,11 @@ footer {
 }
 
 footer .social {
-    list-style-type: none;
+    list-style: none;
     padding: 0;
     display: flex;
     justify-content: center;
+    margin: 0;
 }
 
 footer .social li {
@@ -200,7 +155,7 @@ footer .social li {
 footer .social li a {
     color: #fff;
     font-size: 24px;
-    transition: color 0.3s ease;
+    transition: color 0.3s;
 }
 
 footer .social li a:hover {
