@@ -6,6 +6,7 @@ import { Observable, Subject } from 'rxjs';
 import { AssignIncidentCountDTO } from '../models/assignIncidentCount';
 import { QuantityIncidentState } from '../models/quantityIncidentState';
 import { QuantityStudentIncidentDTO } from '../models/quantityStudentIncidentDTO';
+import { QuantityIncidentMonthDTO } from '../models/quantityIncidentMonthDTO';
 
 const base_url = enviroment.base
 @Injectable({
@@ -45,5 +46,8 @@ export class AssignincidentsService {
   }
   getQuantityStudentIncident(): Observable<QuantityStudentIncidentDTO[]>{
     return this.http.get<QuantityStudentIncidentDTO[]>(`${this.url}/cantidadUsuarioIncidentes`);
+  }
+  getQuantityIncidentMonth(year: number): Observable<QuantityIncidentMonthDTO[]>{
+    return this.http.get<QuantityIncidentMonthDTO[]>(`${this.url}/cantidadIncidentesPorMes?year=${year}`);
   }
 }

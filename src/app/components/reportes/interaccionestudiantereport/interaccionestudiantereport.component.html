@@ -1,8 +1,14 @@
 <div class="card-container">
   <div *ngFor="let interaction of interactionData" class="card">
-    <h3>{{ interaction.interaction }}</h3>
-    <p><strong>Estudiante que envia:</strong> {{ interaction.sender }}</p>
-    <p><strong>Estudiante que recibe:</strong> {{ interaction.receiver }}</p>
-    <p><strong>Fecha de envio:</strong> {{ interaction.date }}</p>
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>{{ interaction.interaction }}</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <p><strong>Estudiante que envia:</strong> {{ interaction.sender }}</p>
+        <p><strong>Estudiante que recibe:</strong> {{ interaction.receiver }}</p>
+        <p><strong>Fecha de envio:</strong> {{ interaction.date }}</p>
+      </mat-card-content>
+    </mat-card>
   </div>
 </div>

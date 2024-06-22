@@ -1,0 +1,27 @@
+<div class="title-container">
+    <div style="text-align: center" class="title">
+      <h1>Cantidad de Incidentes por Mes</h1>
+    </div>
+    <div style="text-align: center" class="year-selector">
+      <mat-form-field appearance="fill">
+        <mat-label>Seleccione el año</mat-label>
+        <input matInput type="number" [(ngModel)]="year" />
+      </mat-form-field>
+      <br>
+      <button mat-raised-button color="primary" (click)="fetchIncidentData()">Aceptar</button>
+    </div>
+    <div style="text-align: center" class="chart-container">
+      <div class="chart-size">
+        <canvas
+          baseChart
+          [datasets]="lineChartData"
+          [labels]="lineChartLabels"
+          [options]="lineChartOptions"
+          [legend]="lineChartLegend"
+          [type]="lineChartType"
+        >
+        </canvas>
+      </div>
+    </div>
+  </div>
+  
