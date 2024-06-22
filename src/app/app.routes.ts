@@ -37,6 +37,9 @@ import { CantidadUsuarioIncidentesComponent } from './components/reportes/cantid
 import { CantidadpersonalidadcarreraestudianteComponent } from './components/reportes/cantpersocarrest/cantidadpersonalidadcarreraestudiante.component';
 import { InteraccionestudiantereportComponent } from './components/reportes/interaccionestudiantereport/interaccionestudiantereport.component';
 import { PromedioReunionStudentComponent } from './components/reportes/promedio-reunion-student/promedio-reunion-student.component';
+import { CantidadusuariosrolComponent } from './components/reportes/cantidadusuariosrol/cantidadusuariosrol.component';
+import { CantidadreumesComponent } from './components/reportes/cantidadreumes/cantidadreumes.component';
+import { CantmeetpercoachComponent } from './components/reportes/cantmeetpercoach/cantmeetpercoach.component';
 
 export const routes: Routes = [
     {
@@ -184,6 +187,9 @@ export const routes: Routes = [
           { path: 'cantidad-perso-degree-student', component: CantidadpersonalidadcarreraestudianteComponent },
           { path: 'interaccion-estudiante', component: InteraccionestudiantereportComponent },
           { path: 'promedio-reunion-estudiante', component: PromedioReunionStudentComponent },
+          { path: 'cantidad-rol-estudiante', component: CantidadusuariosrolComponent },
+          { path: 'cantidad-reuniones-mes', component: CantidadreumesComponent },
+          { path: 'cantidad-reuniones-por-coach', component: CantmeetpercoachComponent },
         ]
       },
 

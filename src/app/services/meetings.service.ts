@@ -4,6 +4,8 @@ import { Meetings } from '../models/meetings';
 import { Observable, Subject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { AverageMeetStudentDTO } from '../models/averageMeetStudentDTO';
+import { QuantityMeetMonthDTO } from '../models/quantityMeetMonthDTO';
+import { QuantityMeetCoachDTO } from '../models/quantityMeetCoachDTO';
 
 
 const base_url = enviroment.base
@@ -39,4 +41,11 @@ export class MeetingsService {
   getAverageMeetStudent(): Observable<AverageMeetStudentDTO[]> {
     return this.http.get<AverageMeetStudentDTO[]>(`${this.url}/promedioReunionUsuario`);
   }
+  getMeetingMoth(year: number): Observable<QuantityMeetMonthDTO[]> {
+    return this.http.get<QuantityMeetMonthDTO[]>(`${this.url}/cantidadReunionesPorMes?year=${year}`);
+  }
+  getQuantityMeetCoach(coach: string): Observable<QuantityMeetCoachDTO[]> {
+    return this.http.get<QuantityMeetCoachDTO[]>(`${this.url}/cantidadMeetPorCoach?name=${coach}`);
+  }
+  
 }

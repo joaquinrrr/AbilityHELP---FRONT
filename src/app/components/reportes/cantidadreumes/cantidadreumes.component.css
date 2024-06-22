@@ -1,0 +1,22 @@
+.title-container {
+  margin: 20px auto;
+  width: 80%;
+}
+
+.title {
+  margin-bottom: 20px;
+}
+
+.year-selector {
+  margin-bottom: 20px;
+}
+
+.chart-container {
+  margin: 0 auto;
+  width: 80%;
+}
+
+.chart-size {
+  width: 50%; /* Ajusta este valor según el tamaño deseado */
+  margin: 0 auto;
+}
