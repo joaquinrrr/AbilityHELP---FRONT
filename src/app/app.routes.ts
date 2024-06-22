@@ -41,6 +41,8 @@ import { CantidadusuariosrolComponent } from './components/reportes/cantidadusua
 import { CantidadreumesComponent } from './components/reportes/cantidadreumes/cantidadreumes.component';
 import { CantmeetpercoachComponent } from './components/reportes/cantmeetpercoach/cantmeetpercoach.component';
 import { CantincidentesmesComponent } from './components/reportes/cantincidentesmes/cantincidentesmes.component';
+import { IncidentesporUserComponent } from './components/reportes/incidentespor-user/incidentespor-user.component';
+import { MeetStuDatereportComponent } from './components/reportes/meet-stu-datereport/meet-stu-datereport.component';
 
 export const routes: Routes = [
     {
@@ -192,6 +194,8 @@ export const routes: Routes = [
           { path: 'cantidad-reuniones-mes', component: CantidadreumesComponent },
           { path: 'cantidad-reuniones-por-coach', component: CantmeetpercoachComponent },
           { path: 'cantidad-incidentes-mes', component:CantincidentesmesComponent },
+          { path: 'incidentes-usuario', component: IncidentesporUserComponent},
+          { path: 'reunion-usuario', component: MeetStuDatereportComponent}
         ]
       },
 

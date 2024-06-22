@@ -6,6 +6,7 @@ import { HttpClient } from '@angular/common/http';
 import { AverageMeetStudentDTO } from '../models/averageMeetStudentDTO';
 import { QuantityMeetMonthDTO } from '../models/quantityMeetMonthDTO';
 import { QuantityMeetCoachDTO } from '../models/quantityMeetCoachDTO';
+import { meetStuDateDTO } from '../models/meetStuDateDTO';
 
 
 const base_url = enviroment.base
@@ -47,5 +48,7 @@ export class MeetingsService {
   getQuantityMeetCoach(coach: string): Observable<QuantityMeetCoachDTO[]> {
     return this.http.get<QuantityMeetCoachDTO[]>(`${this.url}/cantidadMeetPorCoach?name=${coach}`);
   }
-  
+  getMeetStuDate(fecha: string): Observable<meetStuDateDTO[]> {
+    return this.http.get<meetStuDateDTO[]>(`${this.url}/reunionporUsuarioyFecha?date=${fecha}`);
+  }
 }
