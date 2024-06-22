@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { enviroment } from '../../enviroments/enviroment';
-import { Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { Chats } from '../models/chats';
 import { HttpClient } from '@angular/common/http';
 
