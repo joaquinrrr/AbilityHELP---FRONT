@@ -18,3 +18,4 @@ export class PersonalitiesComponent implements OnInit{
   }
   
 }
+//aaaa///
