@@ -74,6 +74,7 @@ export class CrearcarrerasComponent implements OnInit {
       this.c.nameDegree = this.form.value.carrera
       this.c.user.idUser = this.form.value.usuario
       if(this.edicionusers){
+        //update
         this.sC.update(this.c, this.c.idCarrera).subscribe((data) => {
           this.sC.list().subscribe((data) => {
             this.sC.setList(data);
