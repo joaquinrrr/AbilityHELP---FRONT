@@ -47,7 +47,7 @@ export class ListarasignacionincComponent implements OnInit, AfterViewInit{
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
   }
-
+//eliminar
   eliminar(id: number) {
     this.sA.eliminar(id).subscribe((data) => {
       this.sA.list().subscribe((data) => {
