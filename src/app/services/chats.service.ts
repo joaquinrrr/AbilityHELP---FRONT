@@ -35,3 +35,4 @@ export class ChatsService {
     return this.http.delete(`${this.url}/${id}`);
   }
 }
+//chat entity//
