@@ -26,6 +26,7 @@ import { CrearreunionesComponent } from './components/reuniones/crearreuniones/c
 import { AsignacionincidentesComponent } from './components/asignacionincidentes/asignacionincidentes.component';
 import { CrearasignacionincComponent } from './components/asignacionincidentes/crearasignacioninc/crearasignacioninc.component';
 
+//rutas
 export const routes: Routes = [
     {
         path:'personalidades',component:PersonalitiesComponent,
