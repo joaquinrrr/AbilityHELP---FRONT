@@ -9,6 +9,7 @@
       </mat-form-field>
       <br /> 
       <mat-form-field>
+        <!-- Validacion de genero -->
         <input matInput placeholder="Género" formControlName="genero" />
         <mat-error *ngIf="form.get('genero')?.hasError('required')">
           El genero es obligatorio.</mat-error
