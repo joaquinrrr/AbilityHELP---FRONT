@@ -37,3 +37,4 @@ export class TypeinteractionService {
     return this.http.delete(`${this.url}/${id}`);
   }
 }
+//entity
