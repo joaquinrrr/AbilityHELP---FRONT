@@ -47,7 +47,7 @@ export class ListartipointeraccionComponent implements OnInit,AfterViewInit {
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
   }
-
+//eliminar tipo interaccion
   eliminar(id: number) {
     this.sT.eliminar(id).subscribe((data) => {
       this.sT.list().subscribe((data) => {
