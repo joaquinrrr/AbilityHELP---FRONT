@@ -47,6 +47,7 @@ export class ListarcarrerasComponent implements OnInit {
       this.dataSource.paginator = this.paginator;
     });
   }
+  //eliminar
   eliminar(id: number) {
     this.sC.eliminar(id).subscribe((data) => {
       this.sC.list().subscribe((data) => {
