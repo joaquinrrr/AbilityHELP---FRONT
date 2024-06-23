@@ -35,3 +35,4 @@ export class InteractionService {
     return this.http.delete(`${this.url}/${id}`);
   }
 }
+//a//
