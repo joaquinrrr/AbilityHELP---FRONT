@@ -1,0 +1,31 @@
+<div class="container">
+  <div class="title-container">
+    <h1>Reuniones del Coach</h1>
+  </div>
+
+  <mat-form-field class="example-full-width">
+    <mat-label>Ingrese el nombre del Coach:</mat-label>
+    <input
+      matInput
+      [(ngModel)]="coachName"
+      name="coachNameInput"
+      placeholder="Nombre del Coach"
+    />
+  </mat-form-field>
+    <br>
+  <button mat-raised-button color="primary" (click)="fetchMeetingsByCoach()">
+    Buscar Reuniones
+  </button>
+
+  <div class="card-container" *ngIf="meetData.length > 0">
+    <mat-card *ngFor="let meet of meetData">
+      <mat-card-header>
+        <mat-card-title>Reunión</mat-card-title>
+        <mat-card-subtitle>{{ meet.date | date }}</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <p>Cantidad de reuniones: {{ meet.quantity }}</p>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

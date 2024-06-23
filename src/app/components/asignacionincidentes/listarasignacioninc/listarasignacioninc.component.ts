@@ -10,6 +10,7 @@ import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatButtonModule } from '@angular/material/button';
 import { AssignincidentsService } from '../../../services/assignincidents.service';
 import { AssignIncidents } from '../../../models/assignincident';
+import { AppComponent } from '../../../app.component';
 
 @Component({
   selector: 'app-listarasignacioninc',
@@ -34,7 +35,7 @@ export class ListarasignacionincComponent implements OnInit, AfterViewInit{
   dataSource: MatTableDataSource<AssignIncidents>=new MatTableDataSource();
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor(private sA:AssignincidentsService){}
+  constructor(private sA:AssignincidentsService, private aPP: AppComponent){}
   ngOnInit(): void {
     this.sA.list().subscribe((data)=>{ //agrega los datos en el data source
       this.dataSource = new MatTableDataSource(data);
@@ -55,4 +56,15 @@ export class ListarasignacionincComponent implements OnInit, AfterViewInit{
       });
     });
   }
+
+  isADMIN(): boolean {
+    return this.aPP.isADMIN();
+  }
+  isCOACH(): boolean {
+    return this.aPP.isCOACH();
+  }
+  isSTUDENT(): boolean {
+    return this.aPP.isSTUDENT();
+  }
+  
 }

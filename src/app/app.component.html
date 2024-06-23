@@ -1,83 +1,186 @@
-<mat-toolbar color="warn">
-  <mat-icon>menu</mat-icon>
-  <button mat-button [matMenuTriggerFor]="menuEntities">Entidades</button>
+<mat-toolbar color="primary" *ngIf="verificar()" class="custom-toolbar">
+  <button mat-button [routerLink]="['/homes']">
+    <mat-icon>home</mat-icon>Home
+  </button>
+  
+  <button mat-button [matMenuTriggerFor]="menuSalir" class="custom-button">
+    <mat-icon>person</mat-icon><span class="button-text">Perfil</span>
+  </button>
+  <button mat-menu-item [matMenuTriggerFor]="menuPersonalidades" class="custom-button">
+    <mat-icon>face</mat-icon><span class="button-text">Personalidades</span>
+  </button>
+  <button mat-menu-item [matMenuTriggerFor]="menuGeneros" class="custom-button">
+    <mat-icon>wc</mat-icon><span class="button-text">Generos</span>
+  </button>
+  <button mat-menu-item [matMenuTriggerFor]="menuUsuarios" class="custom-button">
+    <mat-icon>people</mat-icon><span class="button-text">Usuarios</span>
+  </button>
+  <button mat-menu-item [matMenuTriggerFor]="menuRoles" class="custom-button">
+    <mat-icon>assignment_ind</mat-icon><span class="button-text">Roles</span>
+  </button>
+  <button mat-menu-item [matMenuTriggerFor]="menuCarreras" class="custom-button">
+    <mat-icon>school</mat-icon><span class="button-text">Carreras</span>
+  </button>
+  <button mat-menu-item [matMenuTriggerFor]="menuIncidentes" class="custom-button">
+    <mat-icon>report_problem</mat-icon><span class="button-text">Incidentes</span>
+  </button>
+  <button mat-menu-item [matMenuTriggerFor]="menuTipoInteracciones" class="custom-button">
+    <mat-icon>psychology</mat-icon><span class="button-text">Tipo de Interacciones</span>
+  </button>
+  <button mat-menu-item [matMenuTriggerFor]="menuInteracciones"  class="custom-button">
+    <mat-icon>question_answer</mat-icon><span class="button-text">Interacciones</span>
+  </button>
+  <button mat-menu-item [matMenuTriggerFor]="menuChat" class="custom-button">
+    <mat-icon>chat</mat-icon><span class="button-text">Chats</span>
+  </button>
+  <button mat-menu-item [matMenuTriggerFor]="menuHorarios" class="custom-button">
+    <mat-icon>schedule</mat-icon><span class="button-text">Horarios</span>
+  </button>
+  <button mat-menu-item [matMenuTriggerFor]="menuReuniones" class="custom-button">
+    <mat-icon>meeting_room</mat-icon><span class="button-text">Reuniones</span>
+  </button>
+  <button mat-menu-item [matMenuTriggerFor]="menuAsigancionInc" class="custom-button">
+    <mat-icon>assignment</mat-icon><span class="button-text">Asignación Incidentes</span>
+  </button>
+  <button mat-button [matMenuTriggerFor]="menuReport">
+    <mat-icon>file_copy</mat-icon> Reportes
+  </button>
+
 </mat-toolbar>
 
-<mat-menu #menuEntities="matMenu">
-  <button mat-menu-item [matMenuTriggerFor]="menuPersonalidades">Personalidades</button>
-  <button mat-menu-item [matMenuTriggerFor]="menuGeneros">Generos</button>
-  <button mat-menu-item [matMenuTriggerFor]="menuUsuarios">Usuarios</button>
-  <button mat-menu-item [matMenuTriggerFor]="menuRoles">Roles</button>
-  <button mat-menu-item [matMenuTriggerFor]="menuCarreras">Carreras</button>
-  <button mat-menu-item [matMenuTriggerFor]="menuIncidentes">Incidentes</button>
-  <button mat-menu-item [matMenuTriggerFor]="menuTipoInteracciones">Tipo de Interacciones</button>
-  <button mat-menu-item [matMenuTriggerFor]="menuInteracciones">Interacciones</button>
-  <button mat-menu-item [matMenuTriggerFor]="menuChat">Chats</button>
-  <button mat-menu-item [matMenuTriggerFor]="menuHorarios">Horarios</button>
-  <button mat-menu-item [matMenuTriggerFor]="menuReuniones">Reuniones</button>
-  <button mat-menu-item [matMenuTriggerFor]="menuAsigancionInc">Asignación Incidentes</button>
-
-</mat-menu>
-
 <mat-menu #menuPersonalidades="matMenu">
-  <button mat-menu-item routerLink="/personalidades">Listar</button>
-  <button mat-menu-item routerLink="/personalidades/insertar">Insertar Personalidad</button> <!-- Enlace a la nueva ruta -->
+  <button mat-menu-item routerLink="/personalidades">
+    <mat-icon>list</mat-icon>Listar
+  </button>
+  <button mat-menu-item routerLink="/personalidades/insertar" *ngIf="isADMIN()">
+    <mat-icon>add</mat-icon>Insertar Personalidad
+  </button>
 </mat-menu>
 
 <mat-menu #menuGeneros="matMenu">
-  <button mat-menu-item routerLink="/generos">Listar</button>
-  <button mat-menu-item routerLink="/generos/insertar">Insertar Género</button> <!-- Enlace a la nueva ruta -->
+  <button mat-menu-item routerLink="/generos">
+    <mat-icon>list</mat-icon>Listar
+  </button>
+  <button mat-menu-item routerLink="/generos/insertar" *ngIf="isADMIN()">
+    <mat-icon>add</mat-icon>Insertar Género
+  </button>
 </mat-menu>
 
 <mat-menu #menuUsuarios="matMenu">
-  <button mat-menu-item routerLink="/usuarios">Listar</button>
-  <button mat-menu-item routerLink="/usuarios/insertar">Insertar Usuario</button> <!-- Enlace a la nueva ruta -->
-
+  <button mat-menu-item routerLink="/usuarios">
+    <mat-icon>list</mat-icon>Listar
+  </button>
+  <button mat-menu-item routerLink="/usuarios/insertar">
+    <mat-icon>add</mat-icon>Insertar Usuario
+  </button>
 </mat-menu>
 
 <mat-menu #menuRoles="matMenu">
-  <button mat-menu-item routerLink="/roles">Listar</button>
-  <button mat-menu-item routerLink="/roles/insertar">Insertar Roles</button>
+  <button mat-menu-item routerLink="/roles">
+    <mat-icon>list</mat-icon>Listar
+  </button>
+  <button mat-menu-item routerLink="/roles/insertar" *ngIf="isADMIN()" >
+    <mat-icon>add</mat-icon>Insertar Roles
+  </button>
 </mat-menu>
 
 <mat-menu #menuCarreras="matMenu">
-  <button mat-menu-item routerLink="/carreras">Listar</button>
-  <button mat-menu-item routerLink="/carreras/insertar">Insertar Carreras</button>
+  <button mat-menu-item routerLink="/carreras">
+    <mat-icon>list</mat-icon>Listar
+  </button>
+  <button mat-menu-item routerLink="/carreras/insertar">
+    <mat-icon>add</mat-icon>Insertar Carreras
+  </button>
 </mat-menu>
 
 <mat-menu #menuIncidentes="matMenu">
-  <button mat-menu-item routerLink="/incidentes">Listar</button>
-  <button mat-menu-item routerLink="/incidentes/insertar">Insertar Incidente</button>
+  <button mat-menu-item routerLink="/incidentes">
+    <mat-icon>list</mat-icon>Listar
+  </button>
+  <button mat-menu-item routerLink="/incidentes/insertar" *ngIf="isADMIN()">
+    <mat-icon>add</mat-icon>Insertar Incidente
+  </button>
 </mat-menu>
 
 <mat-menu #menuTipoInteracciones="matMenu">
-  <button mat-menu-item routerLink="/tipo-interacciones">Listar</button>
-  <button mat-menu-item routerLink="/tipo-interacciones/insertar">Insertar Tipo de Interaccion</button>
+  <button mat-menu-item routerLink="/tipo-interacciones">
+    <mat-icon>list</mat-icon>Listar
+  </button>
+  <button mat-menu-item routerLink="/tipo-interacciones/insertar" *ngIf="isADMIN()">
+    <mat-icon>add</mat-icon>Insertar Tipo de Interaccion
+  </button>
 </mat-menu>
 
 <mat-menu #menuInteracciones="matMenu">
-  <button mat-menu-item routerLink="/interacciones">Listar</button>
-  <button mat-menu-item routerLink="/interacciones/insertar">Insertar Interacciones</button>
+  <button mat-menu-item routerLink="/interacciones">
+    <mat-icon>list</mat-icon>Listar
+  </button>
+  <button mat-menu-item routerLink="/interacciones/insertar" *ngIf="isSTUDENT()">
+    <mat-icon>add</mat-icon>Insertar Interacciones
+  </button>
 </mat-menu>
 
 <mat-menu #menuChat="matMenu">
-  <button mat-menu-item routerLink="/chats">Listar</button>
-  <button mat-menu-item routerLink="/chats/insertar">Insertar Chat</button>
+  <button mat-menu-item routerLink="/chats">
+    <mat-icon>list</mat-icon>Listar
+  </button>
+  <button mat-menu-item routerLink="/chats/insertar">
+    <mat-icon>add</mat-icon>Insertar Chat
+  </button>
 </mat-menu>
 
 <mat-menu #menuHorarios="matMenu">
-  <button mat-menu-item routerLink="/horarios">Listar</button>
-  <button mat-menu-item routerLink="/horarios/insertar">Insertar Horario</button>
+  <button mat-menu-item routerLink="/horarios">
+    <mat-icon>list</mat-icon>Listar
+  </button>
+  <button mat-menu-item routerLink="/horarios/insertar" *ngIf="isCOACH()">
+    <mat-icon>add</mat-icon>Insertar Horario
+  </button>
 </mat-menu>
 
 <mat-menu #menuReuniones="matMenu">
-  <button mat-menu-item routerLink="/reuniones">Listar</button>
-  <button mat-menu-item routerLink="/reuniones/insertar">Insertar Reuniones</button>
+  <button mat-menu-item routerLink="/reuniones">
+    <mat-icon>list</mat-icon>Listar
+  </button>
+  <button mat-menu-item routerLink="/reuniones/insertar" *ngIf="isSTUDENT()">
+    <mat-icon>add</mat-icon>Insertar Reuniones
+  </button>
 </mat-menu>
 
 <mat-menu #menuAsigancionInc="matMenu">
-  <button mat-menu-item routerLink="/asignacion-incidentes">Listar</button>
-  <button mat-menu-item routerLink="/asignacion-incidentes/insertar">Insertar Asignación incidentes</button>
+  <button mat-menu-item routerLink="/asignacion-incidentes">
+    <mat-icon>list</mat-icon>Listar
+  </button>
+  <button mat-menu-item routerLink="/asignacion-incidentes/insertar">
+    <mat-icon>add</mat-icon>Insertar Asignación incidentes
+  </button>
+</mat-menu>
+
+<mat-menu #menuReport="matMenu">
+  <button mat-menu-item routerLink="/reportes">Conteo de asignacion incidentes</button>
+  <button mat-menu-item routerLink="/reportes/cantidad-incidentes-state">Cantidad incidentes por estado</button>
+  <button mat-menu-item routerLink="/reportes/cantidad-student-incidente">Cantidad Incidentes por usuario</button>
+  <button mat-menu-item routerLink="/reportes/cantidad-perso-degree-student" *ngIf="isADMIN()">Cantidad Personalidades por Carrera y Estudiantes</button>
+  <button mat-menu-item routerLink="/reportes/interaccion-estudiante" *ngIf="isADMIN()">Mostrar interaccion entre estudiantes</button>
+  <button mat-menu-item routerLink="/reportes/promedio-reunion-estudiante">Promedio de reunion de estudiantes</button>
+  <button mat-menu-item routerLink="/reportes/cantidad-rol-estudiante" *ngIf="isADMIN()">Cantidad de usuarios por rol</button>
+  <button mat-menu-item routerLink="/reportes/cantidad-reuniones-mes" *ngIf="isADMIN() || isCOACH()">Cantidad de reuniones por mes</button>
+  <button mat-menu-item routerLink="/reportes/cantidad-reuniones-por-coach" *ngIf="isADMIN() || isCOACH()">Cantidad de reuniones por coach</button>
+  <button mat-menu-item routerLink="/reportes/cantidad-incidentes-mes" *ngIf="isADMIN()">Cantidad de incidentes por mes</button>
+  <button mat-menu-item routerLink="/reportes/incidentes-usuario" *ngIf="isADMIN() || isCOACH()">Incidentes realizados por usuario</button>
+  <button mat-menu-item routerLink="/reportes/reunion-usuario">Reuniones por Usuario</button>
+
+  <!-- Agrega más elementos de menú si es necesario -->
+</mat-menu>
+
+<mat-menu #menuSalir="matMenu">
+  <button mat-menu-item routerLink="/login" (click)="cerrar()">
+    <mat-icon>logout</mat-icon>Cerrar sesión
+  </button>
+  <button mat-menu-item>
+    Rol: <span>{{ role }}</span>
+    <p>Nombre de usuario: {{ userId }}</p>
+  </button>
 </mat-menu>
 
 <router-outlet></router-outlet>

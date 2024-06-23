@@ -1,0 +1,28 @@
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+.card {
+  background-color: #f8f9fa;
+  border: 1px solid #dee2e6;
+  border-radius: 5px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  width: 250px;
+  text-align: center;
+}
+
+.card h3 {
+  color: #343a40;
+  font-size: 1.2em;
+  margin-bottom: 10px;
+}
+
+.card p {
+  color: #495057;
+  font-size: 1em;
+  margin: 5px 0;
+}

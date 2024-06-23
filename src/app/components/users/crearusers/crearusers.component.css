@@ -19,3 +19,12 @@
 mat-form-field {
   width: 70%;
 }
+
+.mat-form-field.mat-focused .mat-form-field-label {
+  color: #3f51b5 !important; /* Cambia el color a tu preferencia */
+}
+
+.mat-icon-button {
+  margin-left: -40px; /* Ajusta la posición del botón de visibilidad */
+  margin-top: -10px;
+}

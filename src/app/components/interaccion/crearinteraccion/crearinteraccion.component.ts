@@ -20,6 +20,7 @@ import { UsersService } from '../../../services/users.service';
 import { InteractionService } from '../../../services/interaction.service';
 import { TypeinteractionService } from '../../../services/typeinteraction.service';
 import { TypeInteraccion } from '../../../models/typeinteraction';
+import { LoginService } from '../../../services/login.service';
 
 
 @Component({
@@ -40,14 +41,15 @@ import { TypeInteraccion } from '../../../models/typeinteraction';
   templateUrl: './crearinteraccion.component.html',
   styleUrl: './crearinteraccion.component.css'
 })
-export class CrearinteraccionComponent implements OnInit{
-  form: FormGroup = new FormGroup({});
+export class CrearinteraccionComponent implements OnInit {
+  form: FormGroup;
   i: Interaction = new Interaction();
+  currentUser: Users = new Users();
   listarusuarios: Users[] = [];
   listatipointera: TypeInteraccion[] = [];
   edicioninteraction: boolean = false;
   id: number = 0;
-  mindate = new Date()
+  mindate = new Date();
   maxDate = new Date(4000, 0, 1);
 
   constructor(
@@ -56,25 +58,46 @@ export class CrearinteraccionComponent implements OnInit{
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private sI: InteractionService,
-    private sTi: TypeinteractionService
-  ) {}
-
-  ngOnInit(): void {
-    this.route.params.subscribe((data: Params) => {
-      this.id = data['id'];
-      this.edicioninteraction = data['id'] != null;
-      this.init();
-    });
+    private sTi: TypeinteractionService,
+    private sL: LoginService
+  ) {
     this.form = this.formBuilder.group({
       codigo: [''],
       fecha: ['', Validators.required],
-      usuarioenvia: ['', Validators.required],
+      usuarioenvia: [''],
       usuariorecibe: ['', Validators.required],
-      tipointeraccion: ['', Validators.required],
+      tipointeraccion: ['', Validators.required]
     });
+  }
+
+  ngOnInit(): void {
+    const username = this.sL.showName();
+    if (username) {
+      this.sU.userlogin(username).subscribe({
+        next: (user) => {
+          this.currentUser = user;
+          this.form.patchValue({
+            usuarioenvia: this.currentUser.idUser
+          });
+        },
+        error: (err) => {
+          console.error('Error fetching user data', err);
+        }
+      });
+    }
+
+    this.route.params.subscribe((data: Params) => {
+      this.id = +data['id'];
+      this.edicioninteraction = !!data['id'];
+      if (this.edicioninteraction) {
+        this.init();
+      }
+    });
+
     this.sU.list().subscribe((data) => {
       this.listarusuarios = data;
     });
+
     this.sTi.list().subscribe((data) => {
       this.listatipointera = data;
     });
@@ -82,36 +105,40 @@ export class CrearinteraccionComponent implements OnInit{
 
   aceptar(): void {
     if (this.form.valid) {
-      this.i.id = this.form.value.codigo
-      this.i.date = this.form.value.fecha
-      this.i.studentSender.idUser = this.form.value.usuarioenvia
-      this.i.studentReceiver.idUser = this.form.value.usuariorecibe
-      this.i.idType.id = this.form.value.tipointeraccion
-      if(this.edicioninteraction){
-        this.sI.update(this.i, this.i.id).subscribe((data) => {
+      const formData = this.form.value;
+      this.i.id = formData.codigo;
+      this.i.date = formData.fecha;
+      this.i.studentSender.idUser = formData.usuarioenvia ;
+      this.i.studentReceiver.idUser = formData.usuariorecibe ;
+      this.i.idType.id = formData.tipointeraccion ;
+
+      if (this.edicioninteraction) {
+        this.sI.update(this.i, this.i.id).subscribe(() => {
           this.sI.list().subscribe((data) => {
             this.sI.setList(data);
+            this.router.navigate(['interacciones']);
           });
         });
-      }else{
-        this.sI.insert(this.i).subscribe((data) => {
+      } else {
+        this.sI.insert(this.i).subscribe(() => {
           this.sI.list().subscribe((data) => {
             this.sI.setList(data);
+            this.router.navigate(['interacciones']);
           });
         });
       }
-    this.router.navigate(['interacciones']);
     }
   }
-  init() {
+
+  init(): void {
     if (this.edicioninteraction) {
       this.sI.listId(this.id).subscribe((data) => {
-        this.form = new FormGroup({
-          codigo: new FormControl(data.id),
-          fecha: new FormControl(data.date),
-          usuarioenvia: new FormControl(data.studentSender.idUser),
-          usuariorecibe: new FormControl(data.studentReceiver.idUser),
-          tipointeraccion: new FormControl(data.idType.id),
+        this.form.patchValue({
+          codigo: data.id,
+          fecha: data.date,
+          usuarioenvia: data.studentSender.idUser,
+          usuariorecibe: data.studentReceiver.idUser,
+          tipointeraccion: data.idType.id
         });
       });
     }

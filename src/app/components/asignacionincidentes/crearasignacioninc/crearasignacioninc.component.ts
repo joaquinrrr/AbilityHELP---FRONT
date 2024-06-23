@@ -20,6 +20,7 @@ import { Incidents } from '../../../models/incidents';
 import { UsersService } from '../../../services/users.service';
 import { AssignincidentsService } from '../../../services/assignincidents.service';
 import { IncidentsService } from '../../../services/incidents.service';
+import { LoginService } from '../../../services/login.service';
 
 @Component({
   selector: 'app-crearasignacioninc',
@@ -43,11 +44,13 @@ export class CrearasignacionincComponent {
   form: FormGroup = new FormGroup({});
   a: AssignIncidents = new AssignIncidents();
   listarusuarios: Users[] = [];
+  listaAdmins: Users[] = [];
   listarincidentes: Incidents[] = [];
   edicionasignarinci: boolean = false;
   id: number = 0;
-  mindate = new Date()
+  mindate = new Date();
   maxDate = new Date(4000, 0, 1);
+  currentUser: Users = new Users(); // Variable para almacenar el usuario actual como reportador
 
   tiposdeestados: { value: string; viewValue: string }[] = [
     { value: 'ENVIADO', viewValue: 'ENVIADO' },
@@ -61,7 +64,8 @@ export class CrearasignacionincComponent {
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private sA: AssignincidentsService,
-    private sI: IncidentsService
+    private sI: IncidentsService,
+    private sL: LoginService // Inyecta el servicio LoginService aquí
   ) {}
 
   ngOnInit(): void {
@@ -72,11 +76,11 @@ export class CrearasignacionincComponent {
     });
     this.form = this.formBuilder.group({
       codigo: [''],
-      estado: ['', Validators.required],
+      estado: ['ENVIADO', Validators.required],
       fecha: ['', Validators.required],
       detalle: ['', Validators.required],
       admin: ['', Validators.required],
-      reportador: ['', Validators.required],
+      reportador: ['', Validators.required], // Este campo será actualizado con el currentUser
       baneado: ['', Validators.required],
       incidentes: ['', Validators.required],
     });
@@ -86,46 +90,67 @@ export class CrearasignacionincComponent {
     this.sI.list().subscribe((data) => {
       this.listarincidentes = data;
     });
+    this.sU.listByRole('ADMIN').subscribe((data) => {
+      this.listaAdmins = data;
+    });
+
+    // Obtener el currentUser como reportador
+    const username = this.sL.showName();
+    if (username) {
+      this.sU.userlogin(username).subscribe({
+        next: (user) => {
+          this.currentUser = user;
+          this.form.patchValue({
+            reportador: this.currentUser.idUser
+          });
+        },
+        error: (err) => {
+          console.error('Error fetching user data', err);
+        }
+      });
+    }
   }
 
   aceptar(): void {
     if (this.form.valid) {
-      this.a.id = this.form.value.codigo
-      this.a.status = this.form.value.estado
-      this.a.dateAssign = this.form.value.fecha
-      this.a.detailIncident = this.form.value.detalle
-      this.a.idAdmin.idUser = this.form.value.admin
-      this.a.idStudentReporter.idUser = this.form.value.reportador
-      this.a.idStudentBan.idUser = this.form.value.baneado
-      this.a.incidents.id = this.form.value.incidentes
-      if(this.edicionasignarinci){
+      this.a.id = this.form.value.codigo;
+      this.a.status = this.form.value.estado;
+      this.a.dateAssign = this.form.value.fecha;
+      this.a.detailIncident = this.form.value.detalle;
+      this.a.idAdmin.idUser = this.form.value.admin;
+      this.a.idStudentReporter.idUser = this.form.value.reportador;
+      this.a.idStudentBan.idUser = this.form.value.baneado;
+      this.a.incidents.id = this.form.value.incidentes;
+
+      if (this.edicionasignarinci) {
         this.sA.update(this.a, this.a.id).subscribe((data) => {
           this.sA.list().subscribe((data) => {
             this.sA.setList(data);
           });
         });
-      }else{
+      } else {
         this.sA.insert(this.a).subscribe((data) => {
           this.sA.list().subscribe((data) => {
             this.sA.setList(data);
           });
         });
       }
-    this.router.navigate(['asignacion-incidentes']);
+      this.router.navigate(['asignacion-incidentes']);
     }
   }
-  init() {
+
+  init(): void {
     if (this.edicionasignarinci) {
       this.sA.listId(this.id).subscribe((data) => {
-        this.form = new FormGroup({
-          codigo: new FormControl(data.id),
-          estado: new FormControl(data.status),
-          fecha: new FormControl(data.dateAssign),
-          detalle: new FormControl(data.detailIncident),
-          admin: new FormControl(data.idAdmin.idUser),
-          reportador: new FormControl(data.idStudentReporter.idUser),
-          baneado: new FormControl(data.idStudentBan.idUser),
-          incidentes: new FormControl(data.incidents.id),
+        this.form.patchValue({
+          codigo: data.id,
+          estado: data.status,
+          fecha: data.dateAssign,
+          detalle: data.detailIncident,
+          admin: data.idAdmin.idUser,
+          reportador: data.idStudentReporter.idUser,
+          baneado: data.idStudentBan.idUser,
+          incidentes: data.incidents.id,
         });
       });
     }

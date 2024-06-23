@@ -8,6 +8,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { Incidents } from '../../../models/incidents';
 import { IncidentsService } from '../../../services/incidents.service';
+import { AppComponent } from '../../../app.component';
 
 @Component({
   selector: 'app-listrarincidentes',
@@ -35,7 +36,7 @@ export class ListrarincidentesComponent implements OnInit{
   ];
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor(private sI: IncidentsService) {}
+  constructor(private sI: IncidentsService, private aPP: AppComponent) {}
 
   ngOnInit(): void {
     this.sI.list().subscribe((data) => {
@@ -53,5 +54,15 @@ export class ListrarincidentesComponent implements OnInit{
         this.sI.setList(data);
       });
     });
+  }
+
+  isADMIN(): boolean {
+    return this.aPP.isADMIN();
+  }
+  isCOACH(): boolean {
+    return this.aPP.isCOACH();
+  }
+  isSTUDENT(): boolean {
+    return this.aPP.isSTUDENT();
   }
 }

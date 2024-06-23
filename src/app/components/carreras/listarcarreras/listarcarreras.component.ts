@@ -8,6 +8,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { Carreras } from '../../../models/degrees';
 import { DegreesService } from '../../../services/degrees.service';
+import { LoginService } from '../../../services/login.service';
+import { AppComponent } from '../../../app.component';
 
 @Component({
   selector: 'app-listarcarreras',
@@ -35,7 +37,7 @@ export class ListarcarrerasComponent implements OnInit {
   ];
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor(private sC: DegreesService) {}
+  constructor(private sC: DegreesService, private aPP: AppComponent) {}
 
   ngOnInit(): void {
     this.sC.list().subscribe((data) => {
@@ -54,5 +56,15 @@ export class ListarcarrerasComponent implements OnInit {
       });
     });
   }
+  isADMIN(): boolean {
+    return this.aPP.isADMIN();
+  }
+  isCOACH(): boolean {
+    return this.aPP.isCOACH();
+  }
+  isSTUDENT(): boolean {
+    return this.aPP.isSTUDENT();
+  }
+
   
 }

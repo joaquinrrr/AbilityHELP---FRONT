@@ -20,6 +20,7 @@ import { UsersService } from '../../../services/users.service';
 import { MeetingsService } from '../../../services/meetings.service';
 import { Schedules } from '../../../models/schedules';
 import { SchedulesService } from '../../../services/schedules.service';
+import { LoginService } from '../../../services/login.service';
 
 @Component({
   selector: 'app-crearreuniones',
@@ -39,13 +40,14 @@ import { SchedulesService } from '../../../services/schedules.service';
   templateUrl: './crearreuniones.component.html',
   styleUrl: './crearreuniones.component.css'
 })
-export class CrearreunionesComponent implements OnInit{
-  form: FormGroup = new FormGroup({});
+export class CrearreunionesComponent implements OnInit {
+  form: FormGroup;
   m: Meetings = new Meetings();
   listarusuarios: Users[] = [];
   listahorarios: Schedules[] = [];
   edicionreunion: boolean = false;
   id: number = 0;
+  currentUser: Users = new Users(); // Variable para almacenar el usuario actual
 
   constructor(
     private sU: UsersService,
@@ -54,7 +56,14 @@ export class CrearreunionesComponent implements OnInit{
     private route: ActivatedRoute,
     private sM: MeetingsService,
     private sS: SchedulesService,
-  ) {}
+    private loginService: LoginService
+  ) {
+    this.form = this.formBuilder.group({
+      codigo: [''],
+      usuario: [{ value: '', disabled: true }, Validators.required], // Campo deshabilitado
+      horario: ['', Validators.required],
+    });
+  }
 
   ngOnInit(): void {
     this.route.params.subscribe((data: Params) => {
@@ -62,46 +71,67 @@ export class CrearreunionesComponent implements OnInit{
       this.edicionreunion = data['id'] != null;
       this.init();
     });
-    this.form = this.formBuilder.group({
-      codigo: [''],
-      usuario: ['', Validators.required],
-      horario: ['', Validators.required],
-    });
+
     this.sS.list().subscribe((data) => {
       this.listahorarios = data;
     });
-    this.sU.list().subscribe((data) => {
-      this.listarusuarios = data;
-    });
-  }
-  aceptar(): void {
-    if (this.form.valid) {
-      this.m.idMeet = this.form.value.codigo
-      this.m.studentId.idUser = this.form.value.usuario
-      this.m.idmeetSchedule.idSchedule = this.form.value.horario
-      if(this.edicionreunion){
-        this.sM.update(this.m, this.m.idMeet).subscribe((data) => {
-          this.sM.list().subscribe((data) => {
-            this.sM.setList(data);
+
+    // Obtener el usuario actual utilizando el LoginService
+    const username = this.loginService.showName();
+    if (username) {
+      this.sU.userlogin(username).subscribe({
+        next: (user) => {
+          this.currentUser = user;
+          this.form.patchValue({
+            usuario: this.currentUser.idUser, // Establecer el usuario actual en el formulario
           });
-        });
-      }else{
-        this.sM.insert(this.m).subscribe((data) => {
-          this.sM.list().subscribe((data) => {
-            this.sM.setList(data);
-          });
-        });
-      }
-    this.router.navigate(['reuniones']);
+        },
+        error: (err) => {
+          console.error('Error fetching user data', err);
+        }
+      });
     }
   }
+
+  aceptar(): void {
+    if (this.form.valid) {
+      this.m.idMeet = this.form.value.codigo;
+      this.m.studentId.idUser = this.currentUser.idUser; // Asigna el usuario actual
+      this.m.idmeetSchedule.idSchedule = this.form.value.horario;
+
+      if (this.edicionreunion) {
+        this.sM.update(this.m, this.m.idMeet).subscribe(
+          () => {
+            this.sM.list().subscribe((data) => {
+              this.sM.setList(data);
+            });
+          },
+          (error) => {
+            console.error('Error al actualizar la reunión:', error);
+          }
+        );
+      } else {
+        this.sM.insert(this.m).subscribe(
+          () => {
+            this.sM.list().subscribe((data) => {
+              this.sM.setList(data);
+            });
+          },
+          (error) => {
+            console.error('Error al insertar la reunión:', error);
+          }
+        );
+      }
+      this.router.navigate(['reuniones']);
+    }
+  }
+
   init() {
     if (this.edicionreunion) {
       this.sM.listId(this.id).subscribe((data) => {
-        this.form = new FormGroup({
-          codigo: new FormControl(data.idMeet),
-          usuario: new FormControl(data.studentId.idUser),
-          horario: new FormControl(data.idmeetSchedule.idSchedule),
+        this.form.patchValue({
+          codigo: data.idMeet,
+          horario: data.idmeetSchedule.idSchedule,
         });
       });
     }

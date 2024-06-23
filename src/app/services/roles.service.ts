@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { enviroment } from '../../enviroments/enviroment';
 import { HttpClient } from '@angular/common/http';
 import { Roles } from '../models/roles';
-import { Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
+import { QuantityUserRolDTO } from '../models/quantityUserRolDTO';
 
 const base_url = enviroment.base
 @Injectable({
@@ -33,5 +34,8 @@ export class RolesService {
   }
   eliminar(id: number) {
     return this.http.delete(`${this.url}/${id}`);
+  }
+  getQuantityUserRol(): Observable<QuantityUserRolDTO[]> {
+    return this.http.get<QuantityUserRolDTO[]>(`${this.url}/cantidadUsuariosPorRol`);
   }
 }

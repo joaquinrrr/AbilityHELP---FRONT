@@ -1,0 +1,27 @@
+<div class="title-container">
+  <div style="text-align: center" class="title">
+    <h1>Cantidad de Reuniones por Mes</h1>
+  </div>
+  <div style="text-align: center" class="year-selector">
+    <label for="year">Seleccione el año:</label>
+    <input
+      type="number"
+      id="year"
+      [(ngModel)]="year"
+      (change)="fetchMeetingData()"
+    />
+  </div>
+  <div style="text-align: center" class="chart-container">
+    <div class="chart-size">
+      <canvas
+        baseChart
+        [datasets]="barChartData"
+        [labels]="barChartLabels"
+        [options]="barChartOptions"
+        [legend]="barChartLegend"
+        [type]="barChartType"
+      >
+      </canvas>
+    </div>
+  </div>
+</div>

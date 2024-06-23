@@ -1,0 +1,43 @@
+.custom-toolbar {
+  background-color: rgb(31, 95, 168);
+  color: black;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 20px;
+}
+
+.custom-button {
+  color: white;
+  font-family: "Roboto", sans-serif;
+  font-size: 12px; /* Tamaño de letra pequeño */
+  text-transform: uppercase;
+}
+
+.custom-button .mat-icon {
+  margin-right: 8px;
+  color: white;
+}
+
+.button-text {
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+  font-size: 12px; /* Tamaño de letra pequeño */
+  color: white;
+}
+
+.mat-menu-item {
+  display: flex;
+  align-items: center;
+}
+
+.mat-menu-item .mat-icon {
+  margin-right: 8px;
+  color: white;
+}
+
+.mat-menu-item .button-text {
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  font-size: 12px; /* Tamaño de letra pequeño */
+  color: white;
+}

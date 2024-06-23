@@ -1,0 +1,32 @@
+<div class="container">
+    <div class="title-container">
+      <h1>Reuniones por Usuario y Fecha</h1>
+    </div>
+  
+    <div class="form-container">
+      <mat-form-field class="example-full-width">
+        <mat-label>Seleccione una fecha:</mat-label>
+        <input matInput [matDatepicker]="picker" [(ngModel)]="selectedDate" name="selectedDateInput">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+  
+      <button mat-raised-button color="primary" (click)="fetchMeetingsByDate()">
+        Buscar Reuniones
+      </button>
+    </div>
+  
+    <div class="card-container" *ngIf="meetStuData.length > 0">
+      <mat-card *ngFor="let meeting of meetStuData">
+        <mat-card-header>
+          <mat-card-title>{{ meeting.nameU }}</mat-card-title>
+          <mat-card-subtitle>{{ meeting.date | date }}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <p>Inicio: {{ meeting.starthour | date:'shortTime' }}</p>
+          <p>Fin: {{ meeting.finishhour | date:'shortTime' }}</p>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+  

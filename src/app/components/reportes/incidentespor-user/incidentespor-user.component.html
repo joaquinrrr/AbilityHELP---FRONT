@@ -1,0 +1,34 @@
+<div class="container">
+    <div class="title-container">
+      <h1>Incidentes del Usuario</h1>
+    </div>
+  
+    <mat-form-field class="example-full-width">
+      <mat-label>Ingrese el nombre del Usuario:</mat-label>
+      <input
+        matInput
+        [(ngModel)]="userName"
+        name="userNameInput"
+        placeholder="Nombre del Usuario"
+      />
+    </mat-form-field>
+    <br>
+    <button mat-raised-button color="primary" (click)="fetchIncidentsByUser()">
+      Buscar Incidentes
+    </button>
+  
+    <div class="card-container" *ngIf="incidentData.length > 0">
+      <mat-card *ngFor="let incident of incidentData">
+        <mat-card-header>
+          <mat-card-title>Incidente</mat-card-title>
+          <mat-card-subtitle>{{ incident.incident }}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <p>Reportador: {{ incident.reporter }}</p>
+          <p>Baneado: {{ incident.banned }}</p>
+          <p>Detalle: {{ incident.detail }}</p>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+  

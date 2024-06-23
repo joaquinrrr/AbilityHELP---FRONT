@@ -19,6 +19,7 @@
             <button
               mat-raised-button
               color="primary"
+              *ngIf="isSTUDENT()"
               [routerLink]="['ediciones-reuniones', element.idMeet]"
             >
               <mat-icon>edit</mat-icon>

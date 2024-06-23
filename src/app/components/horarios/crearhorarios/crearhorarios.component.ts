@@ -20,6 +20,7 @@ import { Schedules } from '../../../models/schedules';
 import { Users } from '../../../models/users';
 import { SchedulesService } from '../../../services/schedules.service';
 import { UsersService } from '../../../services/users.service';
+import { LoginService } from '../../../services/login.service';
 
 @Component({
   selector: 'app-crearhorarios',
@@ -41,13 +42,14 @@ import { UsersService } from '../../../services/users.service';
   styleUrl: './crearhorarios.component.css',
 })
 export class CrearhorariosComponent implements OnInit {
-  form: FormGroup = new FormGroup({});
+  form: FormGroup;
   s: Schedules = new Schedules();
   listausuarios: Users[] = [];
   edicionhorarios: boolean = false;
   id: number = 0;
-  mindate = new Date()
+  mindate = new Date();
   maxDate = new Date(4000, 0, 1);
+  currentUser: Users = new Users(); // Variable para almacenar el usuario actual como coach
 
   constructor(
     private sS: SchedulesService,
@@ -55,14 +57,8 @@ export class CrearhorariosComponent implements OnInit {
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private sU: UsersService,
-  ) {}
-
-  ngOnInit(): void {
-    this.route.params.subscribe((data: Params) => {
-      this.id = data['id'];
-      this.edicionhorarios = data['id'] != null;
-      this.init();
-    });
+    private loginService: LoginService
+  ) {
     this.form = this.formBuilder.group({
       codigo: [''],
       dia: ['', Validators.required],
@@ -70,9 +66,34 @@ export class CrearhorariosComponent implements OnInit {
       horafin: ['', Validators.required],
       coach: ['', Validators.required],
     });
+  }
+
+  ngOnInit(): void {
+    this.route.params.subscribe((params: Params) => {
+      this.id = +params['id'];
+      this.edicionhorarios = !!params['id'];
+      this.init();
+    });
+
     this.sU.list().subscribe((data) => {
       this.listausuarios = data;
     });
+
+    // Obtener el usuario actual como coach utilizando userLogin()
+    const username = this.loginService.showName();
+    if (username) {
+      this.sU.userlogin(username).subscribe({
+        next: (user) => {
+          this.currentUser = user;
+          this.form.patchValue({
+            coach: this.currentUser.idUser,
+          });
+        },
+        error: (err) => {
+          console.error('Error fetching user data', err);
+        }
+      });
+    }
   }
 
   aceptar(): void {
@@ -80,19 +101,17 @@ export class CrearhorariosComponent implements OnInit {
       const date = this.form.value.dia;
       const startTime = this.form.value.horainicio;
       const endTime = this.form.value.horafin;
-  
+
       const startDateTime = this.combineDateAndTime(date, startTime);
       const endDateTime = this.combineDateAndTime(date, endTime);
-  
+
       this.s.idSchedule = this.form.value.codigo;
-      this.s.weekDay = date; // Puedes guardar la fecha directamente si es necesario
+      this.s.weekDay = date;
       this.s.startHour = new Date(startDateTime);
       this.s.finishHour = new Date(endDateTime);
       this.s.userCoach.idUser = this.form.value.coach;
-  
-      console.log('Datos enviados:', JSON.stringify(this.s, null, 2));
-  
-      if(this.edicionhorarios){
+
+      if (this.edicionhorarios) {
         this.sS.update(this.s, this.s.idSchedule).subscribe(
           () => {
             this.sS.list().subscribe((data) => {
@@ -103,7 +122,7 @@ export class CrearhorariosComponent implements OnInit {
             console.error('Error al actualizar el horario:', error);
           }
         );
-      }else{
+      } else {
         this.sS.insert(this.s).subscribe(
           () => {
             this.sS.list().subscribe((data) => {
@@ -118,17 +137,16 @@ export class CrearhorariosComponent implements OnInit {
       this.router.navigate(['horarios']);
     }
   }
-  
+
   combineDateAndTime(date: Date, time: string): string {
     const datePart = date.toISOString().split('T')[0];
     return `${datePart} ${this.convertTo24HourFormat(time)}`;
   }
-  
+
   convertTo24HourFormat(time: string): string {
-    // Convert the time from 12-hour format to 24-hour format
     const [timePart, modifier] = time.split(' ');
     let [hours, minutes] = timePart.split(':');
-  
+
     if (hours === '12') {
       hours = '00';
     }
@@ -138,15 +156,15 @@ export class CrearhorariosComponent implements OnInit {
     return `${hours}:${minutes}:00`;
   }
 
-  init() {
+  init(): void {
     if (this.edicionhorarios) {
       this.sS.listId(this.id).subscribe((data) => {
-        this.form = new FormGroup({
-          codigo: new FormControl(data.idSchedule),
-          dia: new FormControl(data.weekDay),
-          horainicio: new FormControl(data.startHour),
-          horafin: new FormControl(data.finishHour),
-          coach: new FormControl(data.userCoach.idUser),
+        this.form.patchValue({
+          codigo: data.idSchedule,
+          dia: data.weekDay,
+          horainicio: data.startHour,
+          horafin: data.finishHour,
+          coach: data.userCoach.idUser,
         });
       });
     }

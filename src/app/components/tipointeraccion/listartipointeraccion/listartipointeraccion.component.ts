@@ -10,6 +10,7 @@ import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatButtonModule } from '@angular/material/button';
 import { TypeinteractionService } from '../../../services/typeinteraction.service';
 import { TypeInteraccion } from '../../../models/typeinteraction';
+import { AppComponent } from '../../../app.component';
 @Component({
   selector: 'app-listartipointeraccion',
   standalone: true,
@@ -34,7 +35,7 @@ export class ListartipointeraccionComponent implements OnInit,AfterViewInit {
   dataSource: MatTableDataSource<TypeInteraccion>=new MatTableDataSource();
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor(private sT:TypeinteractionService){}
+  constructor(private sT:TypeinteractionService, private aPP: AppComponent){}
   ngOnInit(): void {
     this.sT.list().subscribe((data)=>{ //agrega los datos en el data source
       this.dataSource = new MatTableDataSource(this.sortGenders(data));
@@ -58,5 +59,15 @@ export class ListartipointeraccionComponent implements OnInit,AfterViewInit {
 
   sortGenders(type: TypeInteraccion[]): TypeInteraccion[] {
     return type.sort((a, b) => a.id - b.id);
+  }
+
+  isADMIN(): boolean {
+    return this.aPP.isADMIN();
+  }
+  isCOACH(): boolean {
+    return this.aPP.isCOACH();
+  }
+  isSTUDENT(): boolean {
+    return this.aPP.isSTUDENT();
   }
 }

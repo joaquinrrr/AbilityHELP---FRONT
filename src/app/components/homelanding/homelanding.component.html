@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Inicio - Ability Help</title>
+    <link rel="stylesheet" href="homelanding.component.css" />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+  </head>
+
+  <body>
+    <header>
+      <mat-toolbar color="primary">
+        <span class="logo">Ability Help</span>
+        <span class="spacer"></span>
+        <nav>
+          <ul>
+            <li><a href="#inicio">Inicio</a></li>
+            <li><a href="#servicios">Servicios</a></li>
+            <li><a href="#nosotros">Nosotros</a></li>
+            <li><a href="#contacto">Contacto</a></li>
+            <li><a (click)="redirectToLogin()">Iniciar sesión</a></li>
+            <li><a (click)="redirectToRegister()">Registrarse</a></li>
+          </ul>
+        </nav>
+      </mat-toolbar>
+    </header>
+
+    <main>
+      <section id="inicio" class="hero">
+        <div class="container">
+          <h1>Bienvenido a Ability Help</h1>
+          <p>
+            Únete a Ability Help y desarrolla tus habilidades interpersonales.
+            ¡Únete a nuestra comunidad hoy!
+          </p>
+          <a href="#contacto" class="btn">Contáctanos</a>
+        </div>
+      </section>
+
+      <section id="servicios" class="services">
+        <div class="container">
+          <h2>Nuestros Servicios</h2>
+          <mat-card class="service">
+            <mat-card-header>
+              <mat-card-title>Foro y Comunidad</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+              <p>
+                Bienvenido al foro de Ability Help en nuestra página web. Aquí
+                encontrarás un espacio interactivo para compartir experiencias y
+                obtener consejos sobre habilidades interpersonales. Únete a
+                nuestra comunidad comprometida en mejorar relaciones personales
+                y profesionales. Accede a recursos exclusivos, participa en
+                discusiones temáticas y establece conexiones significativas.
+                Potencia tu crecimiento personal en Ability Help. ¡Únete al foro
+                ahora!
+              </p>
+            </mat-card-content>
+          </mat-card>
+          <mat-card class="service">
+            <mat-card-header>
+              <mat-card-title>Recursos Interactivos</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+              <p>
+                Descubre los recursos interactivos de Ability Help, tu
+                plataforma para el desarrollo de habilidades interpersonales.
+                Accede a herramientas interactivas que te ayudarán a mejorar tus
+                habilidades de comunicación, empatía, resolución de problemas y
+                trabajo en equipo. Explora actividades prácticas, ejercicios de
+                role-play y desafíos colaborativos para fortalecer tus
+                capacidades sociales y emocionales. ¡Aprovecha al máximo nuestra
+                gama de recursos interactivos y potencia tu crecimiento
+                personal!
+              </p>
+            </mat-card-content>
+          </mat-card>
+        </div>
+      </section>
+
+      <section id="nosotros" class="nosotros">
+        <div class="container">
+          <h2>Acerca de Nosotros</h2>
+          <mat-card class="nosotros">
+            <mat-card-header>
+              <mat-card-title>¿Quiénes Somos?</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+              <p>
+                Ankame S.A. es una startup enfocada en el desarrollo de
+                habilidades interpersonales a través de la aplicación Ability
+                Help. Nuestro objetivo es ayudar a las personas a mejorar sus
+                habilidades de comunicación, empatía y trabajo en equipo, para
+                lograr el éxito en sus relaciones personales y profesionales.
+                Únete a nuestra comunidad y desarrolla todo tu potencial
+                interpersonal.
+              </p>
+            </mat-card-content>
+          </mat-card>
+          <mat-card class="nosotros">
+            <mat-card-header>
+              <mat-card-title>Misión</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+              <p>
+                "Nuestra misión será ayudar a los estudiantes introvertidos a
+                desarrollar sus habilidades blandas. Habilidad muy necesaria
+                para ser un buen profesional actualmente."
+              </p>
+            </mat-card-content>
+          </mat-card>
+          <mat-card class="nosotros">
+            <mat-card-header>
+              <mat-card-title>Visión</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+              <p>
+                "Nuestra visión como empresa es conseguir el reconocimiento y
+                confianza de los estudiantes introvertidos."
+              </p>
+            </mat-card-content>
+          </mat-card>
+        </div>
+      </section>
+
+      <section id="contacto" class="contact">
+        <div class="container">
+          <h2>Contacto</h2>
+          <p>¿Tienes preguntas? Contáctanos.</p>
+          <form action="#">
+            <input type="text" placeholder="Nombre" required />
+            <input type="email" placeholder="Correo electrónico" required />
+            <textarea placeholder="Mensaje" required></textarea>
+            <button type="submit">Enviar</button>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="container">
+        <p>&copy; 2024 Ability Help. Todos los derechos reservados.</p>
+        <ul class="social">
+          <li>
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+          </li>
+          <li>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+          </li>
+          <li>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+          </li>
+        </ul>
+      </div>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>

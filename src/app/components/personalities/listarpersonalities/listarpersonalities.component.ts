@@ -10,6 +10,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatButtonModule } from '@angular/material/button';
+import { AppComponent } from '../../../app.component';
 
 @Component({
   selector: 'app-listarpersonalities',
@@ -33,7 +34,7 @@ export class ListarpersonalitiesComponent implements OnInit, AfterViewInit {
   dataSource: MatTableDataSource<Personalities>=new MatTableDataSource();
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor(private sP:PersonalitiesService){}
+  constructor(private sP:PersonalitiesService, private aPP: AppComponent){}
   ngOnInit(): void {
     this.sP.list().subscribe((data)=>{ 
       this.dataSource = new MatTableDataSource(this.sortPersonalities(data));
@@ -57,5 +58,15 @@ export class ListarpersonalitiesComponent implements OnInit, AfterViewInit {
 
   sortPersonalities(personalities: Personalities[]): Personalities[] {
     return personalities.sort((a, b) => a.idPersonality - b.idPersonality);
+  }
+
+  isADMIN(): boolean {
+    return this.aPP.isADMIN();
+  }
+  isCOACH(): boolean {
+    return this.aPP.isCOACH();
+  }
+  isSTUDENT(): boolean {
+    return this.aPP.isSTUDENT();
   }
 }

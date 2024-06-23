@@ -1,0 +1,137 @@
+<div class="landing-container">
+  <!-- Encabezado -->
+  <header class="landing-header">
+    <h1 class="landing-title">¡Bienvenido, {{ username }}!</h1>
+    <img src="assets/logo.jpg" alt="Logo de la empresa" />
+
+  </header>
+
+  <!-- Sección de características -->
+  <section class="landing-features">
+    <h2 class="section-title">Descubre lo que puedes hacer</h2>
+    
+    <div class="feature-row">
+      <!-- Perfil -->
+      <div class="feature-box" *ngIf="verificar()">
+        <mat-icon>person</mat-icon>
+        <p class="feature-title">Perfil</p>
+        <p class="feature-description">
+          Visualiza y gestiona tu perfil de usuario. Consulta tus datos personales como nombre de usuario y rol en la web app.
+        </p>
+      </div>
+
+      <!-- Usuarios -->
+      <div class="feature-box">
+        <mat-icon>people</mat-icon>
+        <p class="feature-title">Usuarios</p>
+        <p class="feature-description">
+          Explora la lista de usuarios registrados en nuestra plataforma y descubre más sobre la comunidad educativa.
+        </p>
+      </div>
+
+      <!-- Explora Carreras -->
+      <div class="feature-box">
+        <mat-icon>school</mat-icon>
+        <p class="feature-title">Explora Carreras</p>
+        <p class="feature-description">
+          Descubre nuevas oportunidades educativas explorando las distintas carreras disponibles. Encuentra la que se ajuste mejor a tus intereses y metas profesionales.
+        </p>
+      </div>
+
+      <!-- Conecta con Otros Usuarios -->
+      <div class="feature-box">
+        <mat-icon>question_answer</mat-icon>
+        <p class="feature-title">Conecta con Otros Usuarios</p>
+        <p class="feature-description">
+          Mantente conectado con otros usuarios a través de nuestros chats. Interactúa, comparte ideas y colabora en proyectos para potenciar tu aprendizaje y desarrollo.
+        </p>
+      </div>
+
+      <!-- Organiza tu Tiempo -->
+      <div class="feature-box">
+        <mat-icon>schedule</mat-icon>
+        <p class="feature-title">Organiza tu Tiempo</p>
+        <p class="feature-description">
+          Planifica tus actividades y eventos con nuestros horarios personalizables. Mantén el control de tu agenda y nunca te pierdas una oportunidad importante.
+        </p>
+      </div>
+
+      <!-- Participa en Reuniones -->
+      <div class="feature-box">
+        <mat-icon>meeting_room</mat-icon>
+        <p class="feature-title">Participa en Reuniones</p>
+        <p class="feature-description">
+          Únete a reuniones virtuales o presenciales para discutir ideas, colaborar en proyectos y conectarte con la comunidad educativa. Tu participación es clave para el éxito conjunto.
+        </p>
+      </div>
+
+      <!-- Personalidades (visible solo para administradores) -->
+      <div class="feature-box" *ngIf="isADMIN() && verificar()">
+        <mat-icon>face</mat-icon>
+        <p class="feature-title">Personalidades</p>
+        <p class="feature-description">
+          Gestiona y administra las personalidades dentro de la plataforma. Añade, edita o elimina personalidades para mantener un entorno educativo diverso y enriquecedor.
+        </p>
+      </div>
+
+      <!-- Géneros (visible solo para administradores) -->
+      <div class="feature-box" *ngIf="isADMIN() && verificar()">
+        <mat-icon>wc</mat-icon>
+        <p class="feature-title">Géneros</p>
+        <p class="feature-description">
+          Administra los géneros disponibles en la plataforma. Gestiona las categorías de género para promover la inclusión y el respeto dentro de la comunidad educativa.
+        </p>
+      </div>
+
+      <!-- Roles (visible solo para administradores) -->
+      <div class="feature-box" *ngIf="isADMIN() && verificar()">
+        <mat-icon>assignment_ind</mat-icon>
+        <p class="feature-title">Roles</p>
+        <p class="feature-description">
+          Asigna y gestiona los roles de usuario dentro de la web app. Define permisos y responsabilidades para mantener un entorno seguro y eficiente.
+        </p>
+      </div>
+
+      <!-- Incidentes (visible solo para administradores) -->
+      <div class="feature-box" *ngIf="isADMIN() && verificar()">
+        <mat-icon>report_problem</mat-icon>
+        <p class="feature-title">Incidentes</p>
+        <p class="feature-description">
+          Gestiona y registra incidentes reportados en la plataforma. Realiza un seguimiento detallado y toma medidas adecuadas para resolver problemas de manera efectiva.
+        </p>
+      </div>
+
+      <!-- Tipos de Interacciones (visible solo para administradores) -->
+      <div class="feature-box" *ngIf="isADMIN() && verificar()">
+        <mat-icon>psychology</mat-icon>
+        <p class="feature-title">Tipos de Interacciones</p>
+        <p class="feature-description">
+          Define y administra los diferentes tipos de interacciones disponibles en la web app. Personaliza las opciones para mejorar la experiencia del usuario y fomentar la colaboración.
+        </p>
+      </div>
+
+      <!-- Interacciones (visible solo para administradores) -->
+      <div class="feature-box" *ngIf="isADMIN() && verificar()">
+        <mat-icon>question_answer</mat-icon>
+        <p class="feature-title">Interacciones</p>
+        <p class="feature-description">
+          Explora y gestiona las interacciones entre usuarios en la plataforma. Analiza datos y mejora las estrategias de comunicación para fortalecer la comunidad educativa.
+        </p>
+      </div>
+
+      <!-- Asignación de Incidentes (visible solo para administradores) -->
+      <div class="feature-box" *ngIf="isADMIN() && verificar()">
+        <mat-icon>assignment</mat-icon>
+        <p class="feature-title">Asignación de Incidentes</p>
+        <p class="feature-description">
+          Asigna incidentes reportados a los usuarios correspondientes. Asegúrate de manejar eficientemente cada situación para mantener un entorno seguro y colaborativo.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="landing-footer">
+    <p>&copy; 2024 Ability Help. Todos los derechos reservados.</p>
+  </footer>
+</div>

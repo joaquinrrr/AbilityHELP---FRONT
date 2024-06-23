@@ -6,7 +6,7 @@ import { CrearchatsComponent } from './crearchats/crearchats.component';
 @Component({
   selector: 'app-chats',
   standalone: true,
-  imports: [RouterOutlet, ListarchatsComponent, CrearchatsComponent],
+  imports: [RouterOutlet, ListarchatsComponent],
   templateUrl: './chats.component.html',
   styleUrl: './chats.component.css'
 })
